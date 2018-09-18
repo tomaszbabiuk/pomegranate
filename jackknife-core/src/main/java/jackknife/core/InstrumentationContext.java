@@ -1,7 +1,6 @@
 package jackknife.core;
 
 public interface InstrumentationContext {
-
     void performClick(final int buttonId);
     void performDoubleClick(int buttonId);
     void performLongClick(int buttonId);

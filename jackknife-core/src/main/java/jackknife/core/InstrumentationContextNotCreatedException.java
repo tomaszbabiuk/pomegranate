@@ -1,6 +1,7 @@
 package jackknife.core;
 
 public class InstrumentationContextNotCreatedException extends Throwable {
-    public InstrumentationContextNotCreatedException(final String message) {
+    InstrumentationContextNotCreatedException(final String message) {
+        super(message);
     }
 }
