@@ -1,1 +1,1 @@
-include ':jackknife-sample', ':jackknife-processor', ':jackknife-core', ':jackknife.espresso'
+include ':jackknife-sample', ':jackknife-processor', ':jackknife-core', ':jackknife-espresso'

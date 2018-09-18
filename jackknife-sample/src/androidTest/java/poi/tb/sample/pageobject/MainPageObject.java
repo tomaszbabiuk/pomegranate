@@ -2,7 +2,6 @@ package poi.tb.sample.pageobject;
 
 import jackknife.annotations.WithId;
 import poi.tb.generated.PageObjectBinder;
-import jackknife.pageobject.ClickPerformer;
 import jackknife.pageobject.PageObject;
 import poi.tb.sample.R;
 

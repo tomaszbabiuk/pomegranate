@@ -12,13 +12,9 @@ import org.junit.runner.RunWith;
 
 import jackknife.core.InstrumentationContextNotCreatedException;
 import jackknife.core.InstrumentationContextResolver;
+import jackknife.espresso.EspressoInstrumentationContext;
 import poi.tb.sample.MainActivity;
-import poi.tb.sample.pageobject.EspressoInstrumentationContext;
 import poi.tb.sample.pageobject.MainPageObject;
-
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.allOf;
 
 
 @LargeTest

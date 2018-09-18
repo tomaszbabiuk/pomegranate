@@ -29,7 +29,6 @@ import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 
 import jackknife.annotations.WithId;
-import jackknife.pageobject.ClickPerformer;
 
 public class PoiProcessor extends AbstractProcessor {
 
