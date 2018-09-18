@@ -3,7 +3,9 @@ JackKnife is Page Object injection framework for android automation tests. It's 
 
 If you write android UI automation tests you probably think of Espresso framework. Probably you even heard of Page Object Model pattern which helps you reuse some of the code across your tests. But writing Page Objects is not always a pleasant task. It’s time consuming and you need to be really precise to achieve your goal. This article is about Jack-knife framework which helps you in this tasks. It’s like a popular ButterKnife but insted of injecting views it injects block from which your Page Objects are built.
 
-# traditional page object (for the purpose of Espresso framework)
+# traditional approach
+Here's regular Page Object class, created especially for Espresso ui automatino framework. Developer need to address the details of POMs declaration and also tackle factory for reusing Page Objects across test.
+
 ```java
 public class MainPageObject extends PageObject {
 
@@ -36,17 +38,21 @@ public class MainPageObject extends PageObject {
 }
 ```
 
-    @Test
-    public void canChangeTabsWithoutCrashingAppTest() {
-        MainPageObject mainPage = new MainPageObject();
+And the final test is going to be:
+```java
+@Test
+public void canChangeTabsWithoutCrashingAppTest() {
+    MainPageObject mainPage = new MainPageObject();
 
-        mainPage.clickTest1();
-        mainPage.clickTest2();
-        mainPage.clickTest3();
-    }
-
+    mainPage.clickTest1();
+    mainPage.clickTest2();
+    mainPage.clickTest3();
+}
+```
 # same functionality here with reduced boilerplate
-`
+Here's the same code but using Jack-knife framework this time. The boilerplate is reduced. The more your POM class is growing, the more code you'll save.
+
+```java
 public class MainPageObject extends PageObject {
 
     @WithId(R.id.navigation_test1)
@@ -62,17 +68,16 @@ public class MainPageObject extends PageObject {
         PageObjectBinder.bind(this);
     }
 }
-`
+```
 
-
-
-`
-    @Test
-    public void canChangeTabsWithoutCrashingAppTest() throws Exception, InstrumentationContextNotCreatedException {
-        MainPageObject mainPage = new MainPageObject();
+And the final test... (almost intact):
+```java
+@Test
+public void canChangeTabsWithoutCrashingAppTest() {
+    MainPageObject mainPage = new MainPageObject();
 
         mainPage.test1.click();
         mainPage.test2.click();
         mainPage.test3.click();
-    }
-`
+}
+```
