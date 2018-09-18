@@ -1,4 +1,4 @@
-package poi.tb.annotations;
+package jackknife.annotations;
 
 import android.support.annotation.IdRes;
 

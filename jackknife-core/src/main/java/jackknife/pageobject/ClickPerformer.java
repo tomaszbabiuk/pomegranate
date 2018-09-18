@@ -1,10 +1,10 @@
-package poi.tb.pageobject;
+package jackknife.pageobject;
 
 import android.support.annotation.IdRes;
 
-import poi.tb.core.InstrumentationContext;
-import poi.tb.core.InstrumentationContextNotCreatedException;
-import poi.tb.core.InstrumentationContextResolver;
+import jackknife.core.InstrumentationContext;
+import jackknife.core.InstrumentationContextNotCreatedException;
+import jackknife.core.InstrumentationContextResolver;
 
 public class ClickPerformer<T extends PageObject> {
 

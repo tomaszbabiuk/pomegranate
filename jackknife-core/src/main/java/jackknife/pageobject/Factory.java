@@ -1,4 +1,4 @@
-package poi.tb.pageobject;
+package jackknife.pageobject;
 
 import java.util.HashMap;
 

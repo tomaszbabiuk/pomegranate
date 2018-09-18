@@ -2,7 +2,6 @@ package poi.tb.sample.test;
 
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -11,15 +10,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import poi.tb.core.InstrumentationContext;
-import poi.tb.core.InstrumentationContextNotCreatedException;
-import poi.tb.core.InstrumentationContextResolver;
+import jackknife.core.InstrumentationContextNotCreatedException;
+import jackknife.core.InstrumentationContextResolver;
 import poi.tb.sample.MainActivity;
-import poi.tb.sample.R;
 import poi.tb.sample.pageobject.EspressoInstrumentationContext;
 import poi.tb.sample.pageobject.MainPageObject;
 
-import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;

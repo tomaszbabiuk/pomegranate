@@ -28,8 +28,8 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 
-import poi.tb.annotations.WithId;
-import poi.tb.pageobject.ClickPerformer;
+import jackknife.annotations.WithId;
+import jackknife.pageobject.ClickPerformer;
 
 public class PoiProcessor extends AbstractProcessor {
 

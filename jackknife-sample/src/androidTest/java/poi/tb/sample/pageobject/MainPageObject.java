@@ -1,9 +1,9 @@
 package poi.tb.sample.pageobject;
 
-import poi.tb.annotations.WithId;
+import jackknife.annotations.WithId;
 import poi.tb.generated.PageObjectBinder;
-import poi.tb.pageobject.ClickPerformer;
-import poi.tb.pageobject.PageObject;
+import jackknife.pageobject.ClickPerformer;
+import jackknife.pageobject.PageObject;
 import poi.tb.sample.R;
 
 public class MainPageObject extends PageObject {

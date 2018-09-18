@@ -1,6 +1,6 @@
 package poi.tb.sample.pageobject;
 
-import poi.tb.pageobject.PageObject;
+import jackknife.pageobject.PageObject;
 
 public class Test1PageObject extends PageObject {
 }

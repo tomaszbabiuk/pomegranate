@@ -1,4 +1,4 @@
-package poi.tb.core;
+package jackknife.core;
 
 public class InstrumentationContextResolver {
 
