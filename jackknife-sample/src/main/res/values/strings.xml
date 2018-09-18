@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Page Object Injection sample</string>
+    <string name="test1">Test1</string>
+    <string name="test2">Test2</string>
+    <string name="test3">Test3</string>
+    <string name="do_you_agree_to_terms_and_conditions">Do you agree to terms and conditions?</string>
+    <string name="validate_and_go_next">Validate and go next</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+</resources>
