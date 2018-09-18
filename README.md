@@ -1,9 +1,9 @@
-# jack-knife
+# Jack-knife
 JackKnife is Page Object injection framework for android automation tests. It's like popular ButterKnife but for POMs (Page Object Models).
 
 If you write android UI automation tests you probably think of Espresso framework. Probably you even heard of Page Object Model pattern which helps you reuse some of the code across your tests. But writing Page Objects is not always a pleasant task. It’s time consuming and you need to be really precise to achieve your goal. This article is about Jack-knife framework which helps you in this tasks. It’s like a popular ButterKnife but insted of injecting views it injects block from which your Page Objects are built.
 
-# traditional approach
+# Sample Page Object Model
 Here's regular Page Object class, created especially for Espresso ui automatino framework. Developer need to address the details of POMs declaration and also tackle factory for reusing Page Objects across test.
 
 ```java
@@ -33,7 +33,7 @@ public class MainPageObject extends PageObject {
     }
     
     private <T extends PageObject> T reuseModel(Class<T> classOfPomToReuse) {
-        return Factory.reuse(nextPageObjectType
+        return Factory.reuse(classOfPomToReuse);
     }
 }
 ```
@@ -49,7 +49,7 @@ public void canChangeTabsWithoutCrashingAppTest() {
     mainPage.clickTest3();
 }
 ```
-# same functionality here with reduced boilerplate
+# Same Page Object Model with Jack-knife annotations
 Here's the same code but using Jack-knife framework this time. The boilerplate is reduced. The more your POM class is growing, the more code you'll save.
 
 ```java
