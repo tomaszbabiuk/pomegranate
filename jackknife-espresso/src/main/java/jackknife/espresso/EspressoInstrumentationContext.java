@@ -16,4 +16,10 @@ public class EspressoInstrumentationContext implements InstrumentationContext {
         Matcher<View> matcher = ViewMatchers.withId(id);
         return new EspressoInstrumentedTextView(matcher);
     }
+
+    @Override
+    public InstrumentedTextView resolveInstrumentedViewByText(final String text) {
+        Matcher<View> matcher = ViewMatchers.withText(text);
+        return new EspressoInstrumentedTextView(matcher);
+    }
 }

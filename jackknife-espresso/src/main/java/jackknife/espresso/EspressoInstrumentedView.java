@@ -8,7 +8,9 @@ import android.view.View;
 
 import org.hamcrest.Matcher;
 
+import jackknife.pageobject.Factory;
 import jackknife.pageobject.InstrumentedView;
+import jackknife.pageobject.PageObject;
 
 public class EspressoInstrumentedView implements InstrumentedView {
 
@@ -21,6 +23,12 @@ public class EspressoInstrumentedView implements InstrumentedView {
     @Override
     public void click() {
         viewInteraction.perform(ViewActions.click());
+    }
+
+    @Override
+    public <T extends PageObject> T clickAndGo(final Class<T> pageObjectClass) throws InstantiationException, IllegalAccessException {
+        click();
+        return Factory.reuse(pageObjectClass);
     }
 
     @Override

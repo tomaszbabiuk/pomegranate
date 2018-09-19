@@ -7,9 +7,11 @@ import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,6 +30,7 @@ import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 
 import jackknife.annotations.WithId;
+import jackknife.annotations.WithText;
 import jackknife.core.InstrumentationContext;
 import jackknife.core.InstrumentationContextResolver;
 
@@ -45,9 +48,14 @@ public class PoiProcessor extends AbstractProcessor {
     public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnvironment) {
         if (annotations.size() > 0) {
             try {
-                final Set<? extends Element> instrumentClickElements = roundEnvironment.getElementsAnnotatedWith(WithId.class);
-                final Set<VariableElement> fields = ElementFilter.fieldsIn(instrumentClickElements);
-                final Map<Element, List<VariableElement>> fieldsGroupedByElements = group(fields);
+                Set<VariableElement> allFields = new HashSet<>();
+                final Set<VariableElement> withIdFields = findAnnotatedFields(roundEnvironment, WithId.class);
+                final Set<VariableElement> withTextFields = findAnnotatedFields(roundEnvironment, WithText.class);
+                allFields.addAll(withIdFields);
+                allFields.addAll(withTextFields);
+
+
+                final Map<Element, List<VariableElement>> fieldsGroupedByElements = group(allFields);
 
                 TypeSpec.Builder classBuilder = TypeSpec.classBuilder("PageObjectBinder")
                         .addModifiers(Modifier.PUBLIC);
@@ -55,7 +63,7 @@ public class PoiProcessor extends AbstractProcessor {
                 for (final Element element : fieldsGroupedByElements.keySet()) {
                     List<VariableElement> variableElements = fieldsGroupedByElements.get(element);
 
-                    MethodSpec bindMethod = getMethodSpec(element, variableElements);
+                    MethodSpec bindMethod = getBindMethodSpec(element, variableElements);
                     classBuilder.addMethod(bindMethod);
                 }
 
@@ -70,7 +78,12 @@ public class PoiProcessor extends AbstractProcessor {
         return false;
     }
 
-    private MethodSpec getMethodSpec(final Element element, final List<VariableElement> variableElements) {
+    private Set<VariableElement> findAnnotatedFields(final RoundEnvironment roundEnvironment, Class<? extends Annotation> annotationClass) {
+        final Set<? extends Element> withIdElements = roundEnvironment.getElementsAnnotatedWith(annotationClass);
+        return ElementFilter.fieldsIn(withIdElements);
+    }
+
+    private MethodSpec getBindMethodSpec(final Element element, final List<VariableElement> variableElements) {
         TypeName annotatedClass = TypeName.get(element.asType());
         ParameterSpec bindMethodParam = ParameterSpec.builder(annotatedClass, "target")
                 .build();
@@ -100,12 +113,25 @@ public class PoiProcessor extends AbstractProcessor {
 
     private void generateBindStatement(final MethodSpec.Builder bindMethodBuilder, final VariableElement annotatedField) {
         WithId withIdAnnotation = annotatedField.getAnnotation(WithId.class);
-        int fieldId = withIdAnnotation.value();
-        annotatedField.getSimpleName();
-        bindMethodBuilder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewById($L)",
-                "target",
-                annotatedField.getSimpleName(),
-                fieldId);
+        if (withIdAnnotation != null) {
+            int fieldId = withIdAnnotation.value();
+            annotatedField.getSimpleName();
+            bindMethodBuilder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewById($L)",
+                    "target",
+                    annotatedField.getSimpleName(),
+                    fieldId);
+        }
+
+        WithText withTextAnnotation = annotatedField.getAnnotation(WithText.class);
+        if (withTextAnnotation != null) {
+            String text = withTextAnnotation.value();
+            annotatedField.getSimpleName();
+            bindMethodBuilder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewByText($S)",
+                    "target",
+                    annotatedField.getSimpleName(),
+                    text);
+        }
+
     }
 
     private void writeTypeSpecToFile(String packageName, TypeSpec typeSpec) {

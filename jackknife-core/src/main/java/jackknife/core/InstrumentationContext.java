@@ -6,4 +6,6 @@ import jackknife.pageobject.InstrumentedTextView;
 
 public interface InstrumentationContext {
     InstrumentedTextView resolveInstrumentedViewById(@IdRes final int id);
+
+    InstrumentedTextView resolveInstrumentedViewByText(String text);
 }

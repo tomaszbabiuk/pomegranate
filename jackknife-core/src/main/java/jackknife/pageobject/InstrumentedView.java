@@ -3,6 +3,8 @@ package jackknife.pageobject;
 public interface InstrumentedView {
     void click();
 
+    <T extends PageObject> T clickAndGo(Class<T> pageObjectClass) throws InstantiationException, IllegalAccessException;
+
     void doubleClick();
 
     void longClick();

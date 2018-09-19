@@ -1,6 +1,7 @@
 package poi.tb.sample.pageobject;
 
 import jackknife.annotations.WithId;
+import jackknife.annotations.WithText;
 import jackknife.generated.PageObjectBinder;
 import jackknife.pageobject.InstrumentedView;
 import jackknife.pageobject.PageObject;
@@ -11,7 +12,7 @@ public class MainPageObject extends PageObject {
     @WithId(R.id.navigation_test1)
     public InstrumentedView test1;
 
-    @WithId(R.id.navigation_test2)
+    @WithText("test2")
     public InstrumentedView test2;
 
     @WithId(R.id.navigation_test3)
