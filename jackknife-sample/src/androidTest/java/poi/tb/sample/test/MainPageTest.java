@@ -10,9 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import jackknife.core.InstrumentationContextNotCreatedException;
-import jackknife.core.InstrumentationContextResolver;
-import jackknife.espresso.EspressoInstrumentationContext;
 import poi.tb.sample.MainActivity;
 import poi.tb.sample.pageobject.MainPageObject;
 
@@ -29,12 +26,11 @@ public class MainPageTest {
 
     @Before
     public void setup() {
-        InstrumentationContextResolver.set(new EspressoInstrumentationContext());
         mainActivityTestRule.launchActivity(ACTIVITY_INTENT);
     }
 
     @Test
-    public void canChangeTabsWithoutCrashingAppTest() throws Exception, InstrumentationContextNotCreatedException {
+    public void canChangeTabsWithoutCrashingAppTest() {
         MainPageObject mainPage = new MainPageObject();
 
         mainPage.test1.click();

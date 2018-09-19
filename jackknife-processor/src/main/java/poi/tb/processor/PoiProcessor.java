@@ -3,7 +3,6 @@ package poi.tb.processor;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
-import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 
@@ -29,6 +28,8 @@ import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 
 import jackknife.annotations.WithId;
+import jackknife.core.InstrumentationContext;
+import jackknife.core.InstrumentationContextResolver;
 
 public class PoiProcessor extends AbstractProcessor {
 
@@ -42,24 +43,26 @@ public class PoiProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnvironment) {
-        messager.printMessage(Diagnostic.Kind.NOTE, "dupa2");
-
         if (annotations.size() > 0) {
-            final Set<? extends Element> instrumentClickElements = roundEnvironment.getElementsAnnotatedWith(WithId.class);
-            final Set<VariableElement> fields = ElementFilter.fieldsIn(instrumentClickElements);
-            final Map<Element, List<VariableElement>> fieldsGroupedByElements = group(fields);
+            try {
+                final Set<? extends Element> instrumentClickElements = roundEnvironment.getElementsAnnotatedWith(WithId.class);
+                final Set<VariableElement> fields = ElementFilter.fieldsIn(instrumentClickElements);
+                final Map<Element, List<VariableElement>> fieldsGroupedByElements = group(fields);
 
-            TypeSpec.Builder classBuilder = TypeSpec.classBuilder("PageObjectBinder")
-                    .addModifiers(Modifier.PUBLIC);
+                TypeSpec.Builder classBuilder = TypeSpec.classBuilder("PageObjectBinder")
+                        .addModifiers(Modifier.PUBLIC);
 
-            for (final Element element : fieldsGroupedByElements.keySet()) {
-                List<VariableElement> variableElements = fieldsGroupedByElements.get(element);
+                for (final Element element : fieldsGroupedByElements.keySet()) {
+                    List<VariableElement> variableElements = fieldsGroupedByElements.get(element);
 
-                MethodSpec bindMethod = getMethodSpec(element, variableElements);
-                classBuilder.addMethod(bindMethod);
+                    MethodSpec bindMethod = getMethodSpec(element, variableElements);
+                    classBuilder.addMethod(bindMethod);
+                }
+
+                writeTypeSpecToFile("jackknife.generated", classBuilder.build());
+            } catch (Exception ex) {
+                messager.printMessage(Diagnostic.Kind.ERROR, ex.toString());
             }
-
-            writeTypeSpecToFile("poi.tb.generated", classBuilder.build());
 
             return true;
         }
@@ -76,6 +79,7 @@ public class PoiProcessor extends AbstractProcessor {
                 .addParameter(bindMethodParam)
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC);
 
+        generateContextResolverStatement(bindMethodBuilder);
         for (VariableElement annotatedField : variableElements) {
             generateBindStatement(bindMethodBuilder, annotatedField);
         }
@@ -83,24 +87,25 @@ public class PoiProcessor extends AbstractProcessor {
         return bindMethodBuilder.build();
     }
 
+    private void generateContextResolverStatement(final MethodSpec.Builder bindMethodBuilder) {
+        TypeName instrumentationContextType = TypeName.get(InstrumentationContext.class);
+        TypeName instrumentationContextResolverType = TypeName.get(InstrumentationContextResolver.class);
+
+        bindMethodBuilder.addStatement("$T $N = $T.resolve()",
+                instrumentationContextType,
+                "instrumentationContext",
+                instrumentationContextResolverType);
+
+    }
+
     private void generateBindStatement(final MethodSpec.Builder bindMethodBuilder, final VariableElement annotatedField) {
         WithId withIdAnnotation = annotatedField.getAnnotation(WithId.class);
         int fieldId = withIdAnnotation.value();
-        TypeName fieldClass = TypeName.get(annotatedField.asType());
-
-        if (fieldClass instanceof ParameterizedTypeName) {
-            fieldClass = ((ParameterizedTypeName) fieldClass).typeArguments.get(0);
-
-            annotatedField.getSimpleName();
-            bindMethodBuilder.addStatement("$N.$N = new $T<>($L, $T.class)",
-                    "target",
-                    annotatedField.getSimpleName(),
-                    ClickPerformer.class,
-                    fieldId,
-                    fieldClass);
-        } else {
-            //todo: handle unmatching types
-        }
+        annotatedField.getSimpleName();
+        bindMethodBuilder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewById($L)",
+                "target",
+                annotatedField.getSimpleName(),
+                fieldId);
     }
 
     private void writeTypeSpecToFile(String packageName, TypeSpec typeSpec) {

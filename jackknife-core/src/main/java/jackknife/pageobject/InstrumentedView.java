@@ -1,109 +1,29 @@
 package jackknife.pageobject;
 
-import android.support.annotation.IdRes;
+public interface InstrumentedView {
+    void click();
 
-import jackknife.core.InstrumentationContext;
-import jackknife.core.InstrumentationContextNotCreatedException;
-import jackknife.core.InstrumentationContextResolver;
+    void doubleClick();
 
-public class InstrumentedView<T extends PageObject> {
+    void longClick();
 
-    final int buttonId;
-    final Class<T> nextPageObjectType;
+    void pressBack();
 
-    public InstrumentedView(@IdRes int buttonId, Class<T> nextPageObjectType) {
-        this.buttonId = buttonId;
-        this.nextPageObjectType = nextPageObjectType;
-    }
+    void pressImeActionButton();
 
-    public T click() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performClick(buttonId);
+    void pressKey(int keyCode);
 
-        return Factory.reuse(nextPageObjectType);
-    }
+    void pressMenuKey();
 
-    public T doubleClick() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performDoubleClick(buttonId);
+    void closeSoftKeyboard();
 
-        return Factory.reuse(nextPageObjectType);
-    }
+    void scrollTo();
 
-    public T longClick() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performLongClick(buttonId);
+    void swipeLeft();
 
-        return Factory.reuse(nextPageObjectType);
-    }
+    void swipeRight();
 
-    public T pressBack() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performPressBack(buttonId);
+    void swipeUp();
 
-        return Factory.reuse(nextPageObjectType);
-    }
-
-    public T pressImeActionButton() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performPressImeActionButton(buttonId);
-
-        return Factory.reuse(nextPageObjectType);
-    }
-
-    public T pressKey(final int keyCode) throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performPressKey(buttonId, keyCode);
-
-        return Factory.reuse(nextPageObjectType);
-    }
-
-    public T pressMenuKey() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performPressMenuKey(buttonId);
-
-        return Factory.reuse(nextPageObjectType);
-    }
-
-    public T closeSoftKeyboard() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performCloseSoftKeyboard(buttonId);
-
-        return Factory.reuse(nextPageObjectType);
-    }
-
-    public T scrollTo() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performScrollTo(buttonId);
-
-        return Factory.reuse(nextPageObjectType);
-    }
-
-    public T swipeLeft() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performSwipeLeft(buttonId);
-
-        return Factory.reuse(nextPageObjectType);
-    }
-
-    public T swipeRight() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performSwipeRight(buttonId);
-
-        return Factory.reuse(nextPageObjectType);
-    }
-
-    public T swipeUp() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performSwipeUp(buttonId);
-
-        return Factory.reuse(nextPageObjectType);
-    }
-
-    public T swipeDown() throws InstrumentationContextNotCreatedException, IllegalAccessException, InstantiationException {
-        InstrumentationContext context = InstrumentationContextResolver.resolve();
-        context.performSwipeDown(buttonId);
-
-        return Factory.reuse(nextPageObjectType);
-    }
+    void swipeDown();
 }
