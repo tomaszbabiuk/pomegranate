@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import jackknife.core.InstrumentationContextResolver;
+import jackknife.espresso.EspressoInstrumentationContext;
 import poi.tb.sample.MainActivity;
 import poi.tb.sample.pageobject.MainPageObject;
 
@@ -26,6 +28,7 @@ public class MainPageTest {
 
     @Before
     public void setup() {
+        InstrumentationContextResolver.set(new EspressoInstrumentationContext());
         mainActivityTestRule.launchActivity(ACTIVITY_INTENT);
     }
 
