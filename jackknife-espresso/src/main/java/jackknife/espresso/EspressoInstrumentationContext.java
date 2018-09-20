@@ -18,8 +18,20 @@ public class EspressoInstrumentationContext implements InstrumentationContext {
     }
 
     @Override
+    public InstrumentedTextView resolveInstrumentedViewByParentId(@IdRes final int id) {
+        Matcher<View> matcher = ViewMatchers.withParent(ViewMatchers.withId(id));
+        return new EspressoInstrumentedTextView(matcher);
+    }
+
+    @Override
     public InstrumentedTextView resolveInstrumentedViewByText(final String text) {
         Matcher<View> matcher = ViewMatchers.withText(text);
+        return new EspressoInstrumentedTextView(matcher);
+    }
+
+    @Override
+    public InstrumentedTextView resolveInstrumentedViewTagKey(final int tagKey) {
+        Matcher<View> matcher = ViewMatchers.withTagKey(tagKey);
         return new EspressoInstrumentedTextView(matcher);
     }
 }

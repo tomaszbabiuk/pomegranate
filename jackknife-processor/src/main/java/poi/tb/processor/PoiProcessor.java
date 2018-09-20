@@ -9,7 +9,6 @@ import com.squareup.javapoet.TypeSpec;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -30,12 +29,13 @@ import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 
 import jackknife.annotations.WithId;
+import jackknife.annotations.WithParentId;
+import jackknife.annotations.WithTagKey;
 import jackknife.annotations.WithText;
 import jackknife.core.InstrumentationContext;
 import jackknife.core.InstrumentationContextResolver;
 
 public class PoiProcessor extends AbstractProcessor {
-
     private Messager messager;
 
     @Override
@@ -48,13 +48,7 @@ public class PoiProcessor extends AbstractProcessor {
     public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnvironment) {
         if (annotations.size() > 0) {
             try {
-                Set<VariableElement> allFields = new HashSet<>();
-                final Set<VariableElement> withIdFields = findAnnotatedFields(roundEnvironment, WithId.class);
-                final Set<VariableElement> withTextFields = findAnnotatedFields(roundEnvironment, WithText.class);
-                allFields.addAll(withIdFields);
-                allFields.addAll(withTextFields);
-
-
+                Set<VariableElement> allFields = gatherAllAnnotatedFields(roundEnvironment);
                 final Map<Element, List<VariableElement>> fieldsGroupedByElements = group(allFields);
 
                 TypeSpec.Builder classBuilder = TypeSpec.classBuilder("PageObjectBinder")
@@ -67,7 +61,7 @@ public class PoiProcessor extends AbstractProcessor {
                     classBuilder.addMethod(bindMethod);
                 }
 
-                writeTypeSpecToFile("jackknife.generated", classBuilder.build());
+                writeTypeSpecToFile(classBuilder.build());
             } catch (Exception ex) {
                 messager.printMessage(Diagnostic.Kind.ERROR, ex.toString());
             }
@@ -76,6 +70,16 @@ public class PoiProcessor extends AbstractProcessor {
         }
 
         return false;
+    }
+
+    private Set<VariableElement> gatherAllAnnotatedFields(final RoundEnvironment roundEnvironment) {
+        Set<VariableElement> allFields = new HashSet<>();
+        for (MatcherAnnotation matcherAnnotation : getSupportedAnnotations()) {
+            final Set<VariableElement> withIdFields = findAnnotatedFields(roundEnvironment, matcherAnnotation.getAnnotationClass());
+            allFields.addAll(withIdFields);
+        }
+
+        return allFields;
     }
 
     private Set<VariableElement> findAnnotatedFields(final RoundEnvironment roundEnvironment, Class<? extends Annotation> annotationClass) {
@@ -94,7 +98,7 @@ public class PoiProcessor extends AbstractProcessor {
 
         generateContextResolverStatement(bindMethodBuilder);
         for (VariableElement annotatedField : variableElements) {
-            generateBindStatement(bindMethodBuilder, annotatedField);
+            generateBindStatements(bindMethodBuilder, annotatedField);
         }
 
         return bindMethodBuilder.build();
@@ -108,34 +112,24 @@ public class PoiProcessor extends AbstractProcessor {
                 instrumentationContextType,
                 "instrumentationContext",
                 instrumentationContextResolverType);
-
     }
 
-    private void generateBindStatement(final MethodSpec.Builder bindMethodBuilder, final VariableElement annotatedField) {
-        WithId withIdAnnotation = annotatedField.getAnnotation(WithId.class);
-        if (withIdAnnotation != null) {
-            int fieldId = withIdAnnotation.value();
+    private <A extends Annotation, V> void processAnnotation(final MethodSpec.Builder bindMethodBuilder,
+                                                             final VariableElement annotatedField,
+                                                             MatcherAnnotation<A, V> matcherAnnotation) {
+        A annotation = annotatedField.getAnnotation(matcherAnnotation.getAnnotationClass());
+        if (annotation != null) {
+            V value = matcherAnnotation.getReader().getAnnotationValue(annotation);
             annotatedField.getSimpleName();
-            bindMethodBuilder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewById($L)",
+            bindMethodBuilder.addStatement(matcherAnnotation.getJavaPoetBindStatement(),
                     "target",
                     annotatedField.getSimpleName(),
-                    fieldId);
+                    value);
         }
-
-        WithText withTextAnnotation = annotatedField.getAnnotation(WithText.class);
-        if (withTextAnnotation != null) {
-            String text = withTextAnnotation.value();
-            annotatedField.getSimpleName();
-            bindMethodBuilder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewByText($S)",
-                    "target",
-                    annotatedField.getSimpleName(),
-                    text);
-        }
-
     }
 
-    private void writeTypeSpecToFile(String packageName, TypeSpec typeSpec) {
-        JavaFile javaFile = JavaFile.builder(packageName, typeSpec)
+    private void writeTypeSpecToFile(TypeSpec typeSpec) {
+        JavaFile javaFile = JavaFile.builder("jackknife.generated", typeSpec)
                 .build();
 
         writeFile(javaFile);
@@ -166,7 +160,12 @@ public class PoiProcessor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Collections.singleton(WithId.class.getCanonicalName());
+        HashSet<String> result = new HashSet<>();
+        for (MatcherAnnotation annotationClass : getSupportedAnnotations()) {
+            result.add(annotationClass.getAnnotationClass().getCanonicalName());
+        }
+
+        return result;
     }
 
     private void writeFile(JavaFile javaFile) {
@@ -179,6 +178,34 @@ public class PoiProcessor extends AbstractProcessor {
             String message = String.format("Unable to write file: %s",
                     e.getMessage());
             messager.printMessage(Diagnostic.Kind.ERROR, message);
+        }
+    }
+
+    private Set<MatcherAnnotation> getSupportedAnnotations() {
+        Set<MatcherAnnotation> result = new HashSet<>();
+
+        MatcherAnnotation<WithId, Integer> withId = new MatcherAnnotation<>(WithId.class, WithId::value,
+                "$N.$N = instrumentationContext.resolveInstrumentedViewById($L)");
+        result.add(withId);
+
+        MatcherAnnotation<WithParentId, Integer> withParentId = new MatcherAnnotation<>(WithParentId.class, WithParentId::value,
+                "$N.$N = instrumentationContext.resolveInstrumentedViewByParentId($L)");
+        result.add(withParentId);
+
+        MatcherAnnotation<WithTagKey, Integer> withTagKey = new MatcherAnnotation<>(WithTagKey.class, WithTagKey::value,
+                "$N.$N = instrumentationContext.resolveInstrumentedViewByParentId($L)");
+        result.add(withTagKey);
+
+        MatcherAnnotation<WithText, String> withText = new MatcherAnnotation<>(WithText.class, WithText::value,
+                "$N.$N = instrumentationContext.resolveInstrumentedViewByText($S)");
+        result.add(withText);
+
+        return result;
+    }
+
+    private void generateBindStatements(final MethodSpec.Builder bindMethodBuilder, final VariableElement annotatedField) {
+        for (MatcherAnnotation annotation : getSupportedAnnotations()) {
+            processAnnotation(bindMethodBuilder, annotatedField, annotation);
         }
     }
 }
