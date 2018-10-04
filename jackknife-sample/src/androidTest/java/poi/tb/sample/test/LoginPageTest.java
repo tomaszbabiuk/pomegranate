@@ -12,32 +12,31 @@ import org.junit.runner.RunWith;
 
 import jackknife.core.InstrumentationContextResolver;
 import jackknife.espresso.EspressoInstrumentationContext;
-import poi.tb.sample.MainActivity;
-import poi.tb.sample.pageobject.MainPageObject;
+import poi.tb.sample.LoginActivity;
+import poi.tb.sample.pageobject.LoginPageObject;
 
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainPageTest {
+public class LoginPageTest {
 
-    private final ActivityTestRule<MainActivity> mainActivityTestRule =
-            new ActivityTestRule<>(MainActivity.class);
+    private final ActivityTestRule<LoginActivity> loginActivityTestRule =
+            new ActivityTestRule<>(LoginActivity.class);
 
     private static final Intent ACTIVITY_INTENT =
-            new Intent(InstrumentationRegistry.getTargetContext(), MainActivity.class);
+            new Intent(InstrumentationRegistry.getTargetContext(), LoginActivity.class);
 
     @Before
     public void setup() {
         InstrumentationContextResolver.set(new EspressoInstrumentationContext());
-        mainActivityTestRule.launchActivity(ACTIVITY_INTENT);
+        loginActivityTestRule.launchActivity(ACTIVITY_INTENT);
     }
 
     @Test
     public void canChangeTabsWithoutCrashingAppTest() {
-        MainPageObject mainPage = new MainPageObject();
-
-//        mainPage.test1.click();
-//        mainPage.test2.click();
-//        mainPage.test3.click();
+        LoginPageObject mainPage = new LoginPageObject();
+        mainPage.firstName.typeText("jacky");
+        mainPage.lastName.typeText("knifey");
+        mainPage.login.click();
     }
 }

@@ -12,4 +12,6 @@ public interface InstrumentationContext {
     InstrumentedTextView resolveInstrumentedViewByText(String text);
 
     InstrumentedTextView resolveInstrumentedViewTagKey(int tagKey);
+
+    InstrumentedTextView resolveInstrumentedViewByParentIdAndClass(int id, Class stringClass);
 }

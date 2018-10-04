@@ -28,10 +28,6 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 
-import jackknife.annotations.WithId;
-import jackknife.annotations.WithParentId;
-import jackknife.annotations.WithTagKey;
-import jackknife.annotations.WithText;
 import jackknife.core.InstrumentationContext;
 import jackknife.core.InstrumentationContextResolver;
 
@@ -74,8 +70,8 @@ public class PoiProcessor extends AbstractProcessor {
 
     private Set<VariableElement> gatherAllAnnotatedFields(final RoundEnvironment roundEnvironment) {
         Set<VariableElement> allFields = new HashSet<>();
-        for (MatcherAnnotation matcherAnnotation : getSupportedAnnotations()) {
-            final Set<VariableElement> withIdFields = findAnnotatedFields(roundEnvironment, matcherAnnotation.getAnnotationClass());
+        for (BindStatementBuilder bindStatementBuilder : getSupportedAnnotations()) {
+            final Set<VariableElement> withIdFields = findAnnotatedFields(roundEnvironment, bindStatementBuilder.getAnnotationClass());
             allFields.addAll(withIdFields);
         }
 
@@ -116,15 +112,10 @@ public class PoiProcessor extends AbstractProcessor {
 
     private <A extends Annotation, V> void processAnnotation(final MethodSpec.Builder bindMethodBuilder,
                                                              final VariableElement annotatedField,
-                                                             MatcherAnnotation<A, V> matcherAnnotation) {
-        A annotation = annotatedField.getAnnotation(matcherAnnotation.getAnnotationClass());
+                                                             BindStatementBuilder<A> bindStatementBuilder) {
+        A annotation = annotatedField.getAnnotation(bindStatementBuilder.getAnnotationClass());
         if (annotation != null) {
-            V value = matcherAnnotation.getReader().getAnnotationValue(annotation);
-            annotatedField.getSimpleName();
-            bindMethodBuilder.addStatement(matcherAnnotation.getJavaPoetBindStatement(),
-                    "target",
-                    annotatedField.getSimpleName(),
-                    value);
+            bindStatementBuilder.build(bindMethodBuilder, annotatedField.getSimpleName(), annotation);
         }
     }
 
@@ -161,7 +152,7 @@ public class PoiProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         HashSet<String> result = new HashSet<>();
-        for (MatcherAnnotation annotationClass : getSupportedAnnotations()) {
+        for (BindStatementBuilder annotationClass : getSupportedAnnotations()) {
             result.add(annotationClass.getAnnotationClass().getCanonicalName());
         }
 
@@ -181,30 +172,20 @@ public class PoiProcessor extends AbstractProcessor {
         }
     }
 
-    private Set<MatcherAnnotation> getSupportedAnnotations() {
-        Set<MatcherAnnotation> result = new HashSet<>();
+    private Set<BindStatementBuilder> getSupportedAnnotations() {
+        Set<BindStatementBuilder> result = new HashSet<>();
 
-        MatcherAnnotation<WithId, Integer> withId = new MatcherAnnotation<>(WithId.class, WithId::value,
-                "$N.$N = instrumentationContext.resolveInstrumentedViewById($L)");
-        result.add(withId);
-
-        MatcherAnnotation<WithParentId, Integer> withParentId = new MatcherAnnotation<>(WithParentId.class, WithParentId::value,
-                "$N.$N = instrumentationContext.resolveInstrumentedViewByParentId($L)");
-        result.add(withParentId);
-
-        MatcherAnnotation<WithTagKey, Integer> withTagKey = new MatcherAnnotation<>(WithTagKey.class, WithTagKey::value,
-                "$N.$N = instrumentationContext.resolveInstrumentedViewByParentId($L)");
-        result.add(withTagKey);
-
-        MatcherAnnotation<WithText, String> withText = new MatcherAnnotation<>(WithText.class, WithText::value,
-                "$N.$N = instrumentationContext.resolveInstrumentedViewByText($S)");
-        result.add(withText);
+        result.add(new WithIdBindStatementBuilder());
+        result.add(new WithParentIdBindStatementBuilder());
+        result.add(new WithParentIdAndClassBindStatementBuilder());
+        result.add(new WithTagKeyBindStatementBuilder());
+        result.add(new WithTextBindStatementBuilder());
 
         return result;
     }
 
     private void generateBindStatements(final MethodSpec.Builder bindMethodBuilder, final VariableElement annotatedField) {
-        for (MatcherAnnotation annotation : getSupportedAnnotations()) {
+        for (BindStatementBuilder annotation : getSupportedAnnotations()) {
             processAnnotation(bindMethodBuilder, annotatedField, annotation);
         }
     }

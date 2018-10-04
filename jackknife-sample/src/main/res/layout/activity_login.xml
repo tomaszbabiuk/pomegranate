@@ -9,11 +9,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:gravity="center_horizontal"
-        android:text="@string/test1"/>
+        android:text="@string/login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/first_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -24,6 +25,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/last_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -35,17 +37,19 @@
 
 
     <CheckedTextView
-        android:checkMark="?android:listChoiceIndicatorMultiple"
-        android:id="@+id/checkedTextView"
+        android:id="@+id/terms_and_conditions_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checkMark="?android:listChoiceIndicatorMultiple"
         android:checked="true"
         android:gravity="center_vertical"
         android:text="@string/do_you_agree_to_terms_and_conditions" />
 
     <Button
+        android:id="@+id/login_button"
+        android:onClick="onLoginClick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/validate_and_go_next"/>
+        android:text="@string/validate_and_go_next" />
 
 </android.support.v7.widget.LinearLayoutCompat>
