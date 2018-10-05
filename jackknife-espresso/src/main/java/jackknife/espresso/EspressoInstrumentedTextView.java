@@ -1,5 +1,6 @@
 package jackknife.espresso;
 
+import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
 import android.view.View;
 
@@ -9,8 +10,9 @@ import jackknife.pageobject.InstrumentedTextView;
 
 public class EspressoInstrumentedTextView extends EspressoInstrumentedView implements InstrumentedTextView {
 
-    public EspressoInstrumentedTextView(Matcher<View> matcher) {
-        super(matcher);
+
+    public EspressoInstrumentedTextView(final ViewInteraction viewInteraction) {
+        super(viewInteraction);
     }
 
     @Override

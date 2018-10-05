@@ -28,6 +28,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic;
 
+import jackknife.core.InstrumentationBuilder;
 import jackknife.core.InstrumentationContext;
 import jackknife.core.InstrumentationContextResolver;
 
@@ -71,8 +72,8 @@ public class PoiProcessor extends AbstractProcessor {
     private Set<VariableElement> gatherAllAnnotatedFields(final RoundEnvironment roundEnvironment) {
         Set<VariableElement> allFields = new HashSet<>();
         for (BindStatementBuilder bindStatementBuilder : getSupportedAnnotations()) {
-            final Set<VariableElement> withIdFields = findAnnotatedFields(roundEnvironment, bindStatementBuilder.getAnnotationClass());
-            allFields.addAll(withIdFields);
+            final Set<VariableElement> fields = findAnnotatedFields(roundEnvironment, bindStatementBuilder.getAnnotationClass());
+            allFields.addAll(fields);
         }
 
         return allFields;
@@ -93,26 +94,53 @@ public class PoiProcessor extends AbstractProcessor {
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC);
 
         generateContextResolverStatement(bindMethodBuilder);
+
+        /*
+        Here's what will be created:
+        InstrumentationBuilder termsAndConditionsBuilder = instrumentationContext.createBuilder();
+        termsAndConditionsBuilder.appendByIdMatcher(2131230885);
+        termsAndConditionsBuilder.appendIsAssignableFromMatcher(2131230885);
+        target.termsAndConditions = termsAndConditionsBuilder.build();
+        */
+
         for (VariableElement annotatedField : variableElements) {
+            generateInstrumentationBuilderStatement(bindMethodBuilder, annotatedField);
             generateBindStatements(bindMethodBuilder, annotatedField);
+            generateFinalBuildStatement(bindMethodBuilder, annotatedField);
         }
 
         return bindMethodBuilder.build();
     }
 
-    private void generateContextResolverStatement(final MethodSpec.Builder bindMethodBuilder) {
+    private void generateFinalBuildStatement(final MethodSpec.Builder builder,
+                                             final VariableElement annotatedField) {
+        builder.addStatement("target.$N = $NBuilder.build()",
+                annotatedField.getSimpleName(),
+                annotatedField.getSimpleName());
+    }
+
+    private void generateInstrumentationBuilderStatement(final MethodSpec.Builder builder,
+                                                         final VariableElement annotatedField) {
+        TypeName instrumentationBuilderType = TypeName.get(InstrumentationBuilder.class);
+
+        builder.addStatement("$T $NBuilder = instrumentationContext.createBuilder()",
+                instrumentationBuilderType,
+                annotatedField.getSimpleName());
+    }
+
+    private void generateContextResolverStatement(final MethodSpec.Builder builder) {
         TypeName instrumentationContextType = TypeName.get(InstrumentationContext.class);
         TypeName instrumentationContextResolverType = TypeName.get(InstrumentationContextResolver.class);
 
-        bindMethodBuilder.addStatement("$T $N = $T.resolve()",
+        builder.addStatement("$T $N = $T.resolve()",
                 instrumentationContextType,
                 "instrumentationContext",
                 instrumentationContextResolverType);
     }
 
-    private <A extends Annotation, V> void processAnnotation(final MethodSpec.Builder bindMethodBuilder,
-                                                             final VariableElement annotatedField,
-                                                             BindStatementBuilder<A> bindStatementBuilder) {
+    private <A extends Annotation> void processAnnotation(final MethodSpec.Builder bindMethodBuilder,
+                                                          final VariableElement annotatedField,
+                                                          BindStatementBuilder<A> bindStatementBuilder) {
         A annotation = annotatedField.getAnnotation(bindStatementBuilder.getAnnotationClass());
         if (annotation != null) {
             bindStatementBuilder.build(bindMethodBuilder, annotatedField.getSimpleName(), annotation);
@@ -177,7 +205,7 @@ public class PoiProcessor extends AbstractProcessor {
 
         result.add(new WithIdBindStatementBuilder());
         result.add(new WithParentIdBindStatementBuilder());
-        result.add(new WithParentIdAndClassBindStatementBuilder());
+        result.add(new IsAssignableFromBindStatementBuilder());
         result.add(new WithTagKeyBindStatementBuilder());
         result.add(new WithTextBindStatementBuilder());
 

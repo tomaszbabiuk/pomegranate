@@ -37,6 +37,6 @@ public class LoginPageTest {
         LoginPageObject mainPage = new LoginPageObject();
         mainPage.firstName.typeText("jacky");
         mainPage.lastName.typeText("knifey");
-        mainPage.login.click();
+//        mainPage.login.click();
     }
 }

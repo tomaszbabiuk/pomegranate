@@ -1,12 +1,8 @@
 package jackknife.espresso;
 
 
-import android.support.test.espresso.Espresso;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
-import android.view.View;
-
-import org.hamcrest.Matcher;
 
 import jackknife.pageobject.Factory;
 import jackknife.pageobject.InstrumentedView;
@@ -16,8 +12,8 @@ public class EspressoInstrumentedView implements InstrumentedView {
 
     protected final ViewInteraction viewInteraction;
 
-    public EspressoInstrumentedView(Matcher<View> matcher) {
-        this.viewInteraction = Espresso.onView(matcher);
+    public EspressoInstrumentedView(final ViewInteraction viewInteraction) {
+        this.viewInteraction = viewInteraction;
     }
 
     @Override

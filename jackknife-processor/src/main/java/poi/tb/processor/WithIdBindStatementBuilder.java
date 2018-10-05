@@ -14,8 +14,8 @@ public class WithIdBindStatementBuilder extends BindStatementBuilder<WithId> {
 
     @Override
     public void build(final MethodSpec.Builder builder, final Name annotatedField, final WithId annotationInstance) {
-        builder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewById($L)",
-                "target",
+        //example: termsAndConditionsBuilder.appendByIdMatcher(2131230885);
+        builder.addStatement("$NBuilder.appendByIdMatcher($L)",
                 annotatedField,
                 annotationInstance.value());
     }

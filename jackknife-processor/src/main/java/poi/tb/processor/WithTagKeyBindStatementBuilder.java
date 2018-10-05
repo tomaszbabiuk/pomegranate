@@ -15,7 +15,7 @@ public class WithTagKeyBindStatementBuilder extends BindStatementBuilder<WithTag
 
     @Override
     public void build(final MethodSpec.Builder builder, final Name annotatedField, final WithTagKey annotationInstance) {
-        builder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewTagKey($L)",
+        builder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewByTagKey($L)",
                 "target",
                 annotatedField,
                 annotationInstance.value());
