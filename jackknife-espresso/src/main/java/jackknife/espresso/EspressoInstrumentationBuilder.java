@@ -11,6 +11,7 @@ import org.hamcrest.Matcher;
 import java.util.ArrayList;
 
 import jackknife.core.InstrumentationBuilder;
+import jackknife.pageobject.InstrumentedTextView;
 import jackknife.pageobject.InstrumentedView;
 
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
@@ -27,29 +28,34 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     }
 
     @Override
-    public InstrumentedView build() {
+    public <T extends InstrumentedView> T build(final Class<T> clazz) {
         Matcher matcher = matchers.size() > 1 ? allOf(matchers) : matchers.get(0);
         ViewInteraction interaction = Espresso.onView(matcher);
-        return new EspressoInstrumentedView(interaction);
+
+        if (clazz.isAssignableFrom(InstrumentedTextView.class)) {
+            return (T) new EspressoInstrumentedTextView(interaction);
+        }
+
+        return (T) new EspressoInstrumentedView(interaction);
     }
 
     @Override
-    public void appendByIdMatcher(@IdRes final int id) {
+    public void appendWithIdMatcher(@IdRes final int id) {
         matchers.add(withId(id));
     }
 
     @Override
-    public void appendDescendantOfMatcher(@IdRes final int id) {
+    public void appendIsDescendantOfMatcher(@IdRes final int id) {
         matchers.add(isDescendantOfA(withId(id)));
     }
 
     @Override
-    public void appendTextMatcher(final String text) {
+    public void appendWithTextMatcher(final String text) {
         matchers.add(ViewMatchers.withText(text));
     }
 
     @Override
-    public void appendTagKeyMatcher(final int tagKey) {
+    public void appendWithTagKeyMatcher(final int tagKey) {
         matchers.add(ViewMatchers.withTagKey(tagKey));
     }
 

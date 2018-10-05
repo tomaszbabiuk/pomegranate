@@ -95,18 +95,12 @@ public class PoiProcessor extends AbstractProcessor {
 
         generateContextResolverStatement(bindMethodBuilder);
 
-        /*
-        Here's what will be created:
-        InstrumentationBuilder termsAndConditionsBuilder = instrumentationContext.createBuilder();
-        termsAndConditionsBuilder.appendByIdMatcher(2131230885);
-        termsAndConditionsBuilder.appendIsAssignableFromMatcher(2131230885);
-        target.termsAndConditions = termsAndConditionsBuilder.build();
-        */
-
         for (VariableElement annotatedField : variableElements) {
+            bindMethodBuilder.addComment("Bindings for $T", annotatedField.asType());
             generateInstrumentationBuilderStatement(bindMethodBuilder, annotatedField);
             generateBindStatements(bindMethodBuilder, annotatedField);
             generateFinalBuildStatement(bindMethodBuilder, annotatedField);
+            bindMethodBuilder.addCode("\n");
         }
 
         return bindMethodBuilder.build();
@@ -114,9 +108,10 @@ public class PoiProcessor extends AbstractProcessor {
 
     private void generateFinalBuildStatement(final MethodSpec.Builder builder,
                                              final VariableElement annotatedField) {
-        builder.addStatement("target.$N = $NBuilder.build()",
+        builder.addStatement("target.$N = $NBuilder.build($T.class)",
                 annotatedField.getSimpleName(),
-                annotatedField.getSimpleName());
+                annotatedField.getSimpleName(),
+                TypeName.get(annotatedField.asType()));
     }
 
     private void generateInstrumentationBuilderStatement(final MethodSpec.Builder builder,
@@ -204,7 +199,7 @@ public class PoiProcessor extends AbstractProcessor {
         Set<BindStatementBuilder> result = new HashSet<>();
 
         result.add(new WithIdBindStatementBuilder());
-        result.add(new WithParentIdBindStatementBuilder());
+        result.add(new IsDescendantOfABindStatementBuilder());
         result.add(new IsAssignableFromBindStatementBuilder());
         result.add(new WithTagKeyBindStatementBuilder());
         result.add(new WithTextBindStatementBuilder());

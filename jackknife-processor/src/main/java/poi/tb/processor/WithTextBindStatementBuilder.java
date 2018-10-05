@@ -14,8 +14,8 @@ public class WithTextBindStatementBuilder extends BindStatementBuilder<WithText>
 
     @Override
     public void build(final MethodSpec.Builder builder, final Name annotatedField, final WithText annotationInstance) {
-        builder.addStatement("$N.$N = instrumentationContext.resolveInstrumentedViewByText($S)",
-                "target",
+        //example: termsAndConditionsBuilder.appendWithTextMatcher(2131230885);
+        builder.addStatement("$NBuilder.appendWithIdMatcher($S)",
                 annotatedField,
                 annotationInstance.value());
     }

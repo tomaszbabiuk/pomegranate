@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
         firstNameInput = findViewById(R.id.first_name_input);
         lastNameInput = findViewById(R.id.last_name_input);
         termsAndConditionsCheck = findViewById(R.id.terms_and_conditions_check);
+        termsAndConditionsCheck.setTag(R.id.checkable,"tag");
+        loginButton = findViewById(R.id.login_button);
         findViewById(R.id.login_button);
     }
 

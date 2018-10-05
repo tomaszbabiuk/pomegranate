@@ -2,9 +2,6 @@ package jackknife.espresso;
 
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
-import android.view.View;
-
-import org.hamcrest.Matcher;
 
 import jackknife.pageobject.InstrumentedTextView;
 

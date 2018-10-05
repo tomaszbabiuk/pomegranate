@@ -14,8 +14,8 @@ public class WithIdBindStatementBuilder extends BindStatementBuilder<WithId> {
 
     @Override
     public void build(final MethodSpec.Builder builder, final Name annotatedField, final WithId annotationInstance) {
-        //example: termsAndConditionsBuilder.appendByIdMatcher(2131230885);
-        builder.addStatement("$NBuilder.appendByIdMatcher($L)",
+        //example: termsAndConditionsBuilder.appendWithIdMatcher(2131230885);
+        builder.addStatement("$NBuilder.appendWithIdMatcher($L)",
                 annotatedField,
                 annotationInstance.value());
     }

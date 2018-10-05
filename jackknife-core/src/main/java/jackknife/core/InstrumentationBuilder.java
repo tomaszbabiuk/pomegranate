@@ -6,15 +6,15 @@ import jackknife.pageobject.InstrumentedView;
 
 public interface InstrumentationBuilder {
 
-    InstrumentedView build();
+    <T extends InstrumentedView> T build(Class<T> clazz);
 
-    void appendByIdMatcher(@IdRes final int id);
+    void appendWithIdMatcher(@IdRes final int id);
 
-    void appendDescendantOfMatcher(@IdRes int id);
+    void appendIsDescendantOfMatcher(@IdRes int id);
 
-    void appendTextMatcher(String text);
+    void appendWithTextMatcher(String text);
 
-    void appendTagKeyMatcher(int tagKey);
+    void appendWithTagKeyMatcher(int tagKey);
 
     void appendIsAssignableFromMatcher(Class clazz);
 }
