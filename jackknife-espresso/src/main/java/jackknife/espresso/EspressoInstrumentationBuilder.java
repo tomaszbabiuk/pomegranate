@@ -24,8 +24,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.withAlpha;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withInputType;
+import static android.support.test.espresso.matcher.ViewMatchers.withParentIndex;
 import static android.support.test.espresso.matcher.ViewMatchers.withResourceName;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
+import static android.support.test.espresso.matcher.ViewMatchers.withSubstring;
 import static org.hamcrest.core.AllOf.allOf;
 
 public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
@@ -130,6 +132,16 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     @Override
     public void appendWithSpinnerTextMatcher(final String spinnerText) {
         matchers.add(withSpinnerText(spinnerText));
+    }
+
+    @Override
+    public void appendWithSubstringMatcher(final String substring) {
+        matchers.add(withSubstring(substring));
+    }
+
+    @Override
+    public void appendWithParentIndexMatcher(final int parentIndex) {
+        matchers.add(withParentIndex(parentIndex));
     }
 
     @NonNull

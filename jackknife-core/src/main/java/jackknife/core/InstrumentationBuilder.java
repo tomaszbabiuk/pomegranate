@@ -41,4 +41,8 @@ public interface InstrumentationBuilder {
     void appendWithSpinnerTextMatcher(@StringRes int stringResId);
 
     void appendWithSpinnerTextMatcher(String spinnerText);
+
+    void appendWithSubstringMatcher(String substring);
+
+    void appendWithParentIndexMatcher(int parentIndex);
 }

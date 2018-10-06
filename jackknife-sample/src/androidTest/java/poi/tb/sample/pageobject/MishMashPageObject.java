@@ -12,8 +12,10 @@ import jackknife.annotations.WithEffectiveVisibility;
 import jackknife.annotations.WithHint;
 import jackknife.annotations.WithId;
 import jackknife.annotations.WithInputType;
+import jackknife.annotations.WithParentIndex;
 import jackknife.annotations.WithResourceName;
 import jackknife.annotations.WithSpinnerText;
+import jackknife.annotations.WithSubstring;
 import jackknife.annotations.WithTagKey;
 import jackknife.annotations.WithText;
 import jackknife.generated.PageObjectBinder;
@@ -33,6 +35,8 @@ public class MishMashPageObject {
     @WithInputType(InputType.TYPE_CLASS_PHONE)
     @WithResourceName("res.name")
     @WithSpinnerText("spinnerText")
+    @WithSubstring("aaaa")
+    @WithParentIndex(1)
     public InstrumentedView mishmash1;
 
 

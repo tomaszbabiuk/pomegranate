@@ -19,14 +19,14 @@
 | withSpinnerText(int)                      | @WithSpinnerText(@StringRes int)                      |
 | withSpinnerText(String)                   | @WithSpinnerText(String)                              |
 | withSpinnerText(Matcher<String>)          | [use custom matcher](use-custom-matcher.md)           |
-| withSubstring(String)                     | *)                                                    |
+| withSubstring(String)                     | @WithSubstring(String)                                |
 | withTagKey(int)                           | @WithTagKey(int)                                      |
 | withTagKey(int, Matcher<Object>)          | [use custom matcher](use-custom-matcher.md)           |
 | withTagValue(Matcher<Object>)             | [use custom matcher](use-custom-matcher.md)           |
 | withText(String)                          | @WithText(String)                                     |
 | withText(int)                             | @WithText(fromResource = @StringRes)                  |
 | withText(Matcher<String>)                 | [use custom matcher](use-custom-matcher.md)           |
-| withParentIndex(int)                      | *)                                                    |
+| withParentIndex(int)                      | @WithParentIndex(int)                                 |
 | withParent(Matcher<View>)                 | [use custom matcher](use-custom-matcher.md)           |
 | isAssignableFrom(Class)                   | @IsAssignableFrom(Class)                              |
 | isDisplayed()                             | *)                                                    |
