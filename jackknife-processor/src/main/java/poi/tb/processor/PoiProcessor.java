@@ -37,7 +37,10 @@ import poi.tb.processor.builders.HasChildCountBindStatementBuilder;
 import poi.tb.processor.builders.HasContentDescriptionStatementBuilder;
 import poi.tb.processor.builders.HasErrorTextBindStatementBuilder;
 import poi.tb.processor.builders.HasFocusStatementBuilder;
+import poi.tb.processor.builders.HasImeActionBindStatementBuilder;
 import poi.tb.processor.builders.HasLinksStatementBuilder;
+import poi.tb.processor.builders.HasMinimumChildCountBindStatementBuilder;
+import poi.tb.processor.builders.HasTextColorBindStatementBuilder;
 import poi.tb.processor.builders.IsAssignableFromBindStatementBuilder;
 import poi.tb.processor.builders.IsCheckedBindStatementBuilder;
 import poi.tb.processor.builders.IsClickableBindStatementBuilder;
@@ -239,9 +242,12 @@ public class PoiProcessor extends AbstractProcessor {
         result.add(new HasBackgroundBindStatementBuilder(messager));
         result.add(new HasChildCountBindStatementBuilder(messager));
         result.add(new HasContentDescriptionStatementBuilder(messager));
-        result.add(new HasFocusStatementBuilder(messager));
-        result.add(new HasLinksStatementBuilder(messager));
         result.add(new HasErrorTextBindStatementBuilder(messager));
+        result.add(new HasFocusStatementBuilder(messager));
+        result.add(new HasImeActionBindStatementBuilder(messager));
+        result.add(new HasLinksStatementBuilder(messager));
+        result.add(new HasMinimumChildCountBindStatementBuilder(messager));
+        result.add(new HasTextColorBindStatementBuilder(messager));
 
         result.add(new IsAssignableFromBindStatementBuilder(messager));
         result.add(new IsCheckedBindStatementBuilder(messager));

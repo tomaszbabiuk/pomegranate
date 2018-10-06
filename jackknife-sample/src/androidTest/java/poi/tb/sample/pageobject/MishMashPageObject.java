@@ -1,6 +1,7 @@
 package poi.tb.sample.pageobject;
 
 import android.text.InputType;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
 import jackknife.annotations.HasBackground;
@@ -8,7 +9,10 @@ import jackknife.annotations.HasChildCount;
 import jackknife.annotations.HasContentDescription;
 import jackknife.annotations.HasErrorText;
 import jackknife.annotations.HasFocus;
+import jackknife.annotations.HasImeAction;
 import jackknife.annotations.HasLinks;
+import jackknife.annotations.HasMinimumChildCount;
+import jackknife.annotations.HasTextColor;
 import jackknife.annotations.IsAssignableFrom;
 import jackknife.annotations.IsChecked;
 import jackknife.annotations.IsClickable;
@@ -73,6 +77,9 @@ public class MishMashPageObject {
     @HasLinks()
     @SupportsInputMethods()
     @HasErrorText("error")
+    @HasImeAction(EditorInfo.IME_ACTION_SEND)
+    @HasMinimumChildCount(10)
+    @HasTextColor(R.color.colorAccent)
     public InstrumentedView mishmash1;
 
 

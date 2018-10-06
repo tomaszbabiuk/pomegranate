@@ -50,16 +50,12 @@
 | hasErrorText(String)                      | @HasErrorText(String)                                 |
 | n/a                                       | @HasErrorText(fromResource = @StringRes)              |
 | hasFocus()                                | @HasFocus()                                           |
-| hasImeAction(int)                         | *)                                                    |
+| hasImeAction(int)                         | @HasImeAction(int)                                    |
 | hasImeAction(Matcher<Integer>)            | [use custom matcher](use-custom-matcher.md)           |
 | hasLinks()                                | @HasLinks()                                           |
-| hasMinimumChildCount(int)                 | *)                                                    |
+| hasMinimumChildCount(int)                 | @HasMinimumChildCount(int)                            |
 | hasSibling(Matcher<View>)                 | [use custom matcher](use-custom-matcher.md)           |
-| hasTextColor(int)                         | *)                                                    |
+| hasTextColor(int)                         | @HasTextColor(@ColorRes int)                          |
 | assertThat(T, Matcher<T>)                 | This approach is against Page Object Model pattern.   |
 | assertThat(String, T, Matcher<T>)         | This approach is against Page Object Model pattern.   |
 | supportsInputMethods()                    | @SupportsInputMethods()                               |
-
-```
-*) available soon, for now please use custom matcher
-```

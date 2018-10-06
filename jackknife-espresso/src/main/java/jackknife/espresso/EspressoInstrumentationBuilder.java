@@ -1,6 +1,7 @@
 package jackknife.espresso;
 
 import android.content.Context;
+import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -23,7 +24,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.hasContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.hasFocus;
+import static android.support.test.espresso.matcher.ViewMatchers.hasImeAction;
 import static android.support.test.espresso.matcher.ViewMatchers.hasLinks;
+import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
+import static android.support.test.espresso.matcher.ViewMatchers.hasTextColor;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
@@ -254,6 +258,21 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     @Override
     public void appendHasErrorTextMatcher(final String error) {
         matchers.add(hasErrorText(error));
+    }
+
+    @Override
+    public void appendHasMinimumChildCountMatcher(final int childCount) {
+        matchers.add(hasMinimumChildCount(childCount));
+    }
+
+    @Override
+    public void appendHasTextColorMatcher(@ColorRes final int colorResId) {
+        matchers.add(hasTextColor(colorResId));
+    }
+
+    @Override
+    public void appendHasImeActionMatcher(final int imeAction) {
+        matchers.add(hasImeAction(imeAction));
     }
 
     @NonNull

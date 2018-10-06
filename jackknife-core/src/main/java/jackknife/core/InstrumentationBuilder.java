@@ -1,5 +1,6 @@
 package jackknife.core;
 
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
@@ -84,4 +85,10 @@ public interface InstrumentationBuilder {
     void appendHasErrorTextMatcher(@StringRes int stringResId);
 
     void appendHasErrorTextMatcher(String error);
+
+    void appendHasMinimumChildCountMatcher(int childCount);
+
+    void appendHasTextColorMatcher(@ColorRes int colorResId);
+
+    void appendHasImeActionMatcher(int imeAction);
 }
