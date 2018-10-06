@@ -24,6 +24,10 @@ public interface InstrumentationBuilder {
 
     void appendWithTextMatcher(@StringRes int stringResId);
 
+    void appendWithHintMatcher(String text);
+
+    void appendWithHintMatcher(@StringRes int stringResId);
+
     void appendWithTagKeyMatcher(int tagKey);
 
     void appendIsAssignableFromMatcher(Class clazz);

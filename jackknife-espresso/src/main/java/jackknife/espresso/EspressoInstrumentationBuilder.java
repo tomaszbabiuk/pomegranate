@@ -84,6 +84,16 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     }
 
     @Override
+    public void appendWithHintMatcher(final String text) {
+        matchers.add(ViewMatchers.withHint(text));
+    }
+
+    @Override
+    public void appendWithHintMatcher(@StringRes final int stringResId) {
+        appendWithHintMatcher(applicationContext.getString(stringResId));
+    }
+
+    @Override
     public void appendWithTagKeyMatcher(final int tagKey) {
         matchers.add(ViewMatchers.withTagKey(tagKey));
     }
