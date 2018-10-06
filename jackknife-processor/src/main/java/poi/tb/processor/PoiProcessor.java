@@ -35,6 +35,7 @@ import poi.tb.processor.builders.BindStatementBuilder;
 import poi.tb.processor.builders.HasBackgroundBindStatementBuilder;
 import poi.tb.processor.builders.HasChildCountBindStatementBuilder;
 import poi.tb.processor.builders.HasContentDescriptionStatementBuilder;
+import poi.tb.processor.builders.HasErrorTextBindStatementBuilder;
 import poi.tb.processor.builders.HasFocusStatementBuilder;
 import poi.tb.processor.builders.HasLinksStatementBuilder;
 import poi.tb.processor.builders.IsAssignableFromBindStatementBuilder;
@@ -240,6 +241,7 @@ public class PoiProcessor extends AbstractProcessor {
         result.add(new HasContentDescriptionStatementBuilder(messager));
         result.add(new HasFocusStatementBuilder(messager));
         result.add(new HasLinksStatementBuilder(messager));
+        result.add(new HasErrorTextBindStatementBuilder(messager));
 
         result.add(new IsAssignableFromBindStatementBuilder(messager));
         result.add(new IsCheckedBindStatementBuilder(messager));

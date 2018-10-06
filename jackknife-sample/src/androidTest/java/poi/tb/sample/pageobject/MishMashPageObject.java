@@ -6,6 +6,7 @@ import android.widget.EditText;
 import jackknife.annotations.HasBackground;
 import jackknife.annotations.HasChildCount;
 import jackknife.annotations.HasContentDescription;
+import jackknife.annotations.HasErrorText;
 import jackknife.annotations.HasFocus;
 import jackknife.annotations.HasLinks;
 import jackknife.annotations.IsAssignableFrom;
@@ -71,6 +72,7 @@ public class MishMashPageObject {
     @HasFocus()
     @HasLinks()
     @SupportsInputMethods()
+    @HasErrorText("error")
     public InstrumentedView mishmash1;
 
 
@@ -79,6 +81,7 @@ public class MishMashPageObject {
     @WithHint(fromResource = R.string.login)
     @WithContentDescription(fromResource = R.string.login)
     @WithSpinnerText(fromResource = R.string.login)
+    @HasErrorText(fromResource = R.string.login)
     public InstrumentedView mishmash2;
 
     public MishMashPageObject() {

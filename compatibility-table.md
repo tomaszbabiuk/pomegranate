@@ -47,7 +47,8 @@
 | hasContentDescription()                   | @HasContentDescription()                              |
 | hasDescendant(Matcher<View>)              | [use custom matcher](use-custom-matcher.md)           |
 | hasErrorText(Matcher<String>)             | [use custom matcher](use-custom-matcher.md)           |
-| hasErrorText(String)                      | *)                                                    |
+| hasErrorText(String)                      | @HasErrorText(String)                                 |
+| n/a                                       | @HasErrorText(fromResource = @StringRes)              |
 | hasFocus()                                | @HasFocus()                                           |
 | hasImeAction(int)                         | *)                                                    |
 | hasImeAction(Matcher<Integer>)            | [use custom matcher](use-custom-matcher.md)           |

@@ -21,6 +21,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.hasBackground;
 import static android.support.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.hasContentDescription;
+import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.hasFocus;
 import static android.support.test.espresso.matcher.ViewMatchers.hasLinks;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
@@ -243,6 +244,16 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     @Override
     public void appendHasLinksMatcher() {
         matchers.add(hasLinks());
+    }
+
+    @Override
+    public void appendHasErrorTextMatcher(final int stringResId) {
+        appendWithSpinnerTextMatcher(applicationContext.getString(stringResId));
+    }
+
+    @Override
+    public void appendHasErrorTextMatcher(final String error) {
+        matchers.add(hasErrorText(error));
     }
 
     @NonNull

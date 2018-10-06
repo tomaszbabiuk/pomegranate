@@ -80,4 +80,8 @@ public interface InstrumentationBuilder {
     void appendHasFocusMatcher();
 
     void appendHasLinksMatcher();
+
+    void appendHasErrorTextMatcher(@StringRes int stringResId);
+
+    void appendHasErrorTextMatcher(String error);
 }
