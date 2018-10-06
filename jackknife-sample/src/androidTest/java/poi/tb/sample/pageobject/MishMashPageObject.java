@@ -5,6 +5,9 @@ import android.widget.EditText;
 
 import jackknife.annotations.HasBackground;
 import jackknife.annotations.HasChildCount;
+import jackknife.annotations.HasContentDescription;
+import jackknife.annotations.HasFocus;
+import jackknife.annotations.HasLinks;
 import jackknife.annotations.IsAssignableFrom;
 import jackknife.annotations.IsChecked;
 import jackknife.annotations.IsClickable;
@@ -18,6 +21,7 @@ import jackknife.annotations.IsJavascriptEnabled;
 import jackknife.annotations.IsNotChecked;
 import jackknife.annotations.IsRoot;
 import jackknife.annotations.IsSelected;
+import jackknife.annotations.SupportsInputMethods;
 import jackknife.annotations.Visibility;
 import jackknife.annotations.WithAlpha;
 import jackknife.annotations.WithContentDescription;
@@ -63,6 +67,10 @@ public class MishMashPageObject {
     @IsNotChecked()
     @HasBackground(R.drawable.ic_launcher_background)
     @HasChildCount(5)
+    @HasContentDescription()
+    @HasFocus()
+    @HasLinks()
+    @SupportsInputMethods()
     public InstrumentedView mishmash1;
 
 

@@ -34,6 +34,9 @@ import jackknife.core.InstrumentationContextResolver;
 import poi.tb.processor.builders.BindStatementBuilder;
 import poi.tb.processor.builders.HasBackgroundBindStatementBuilder;
 import poi.tb.processor.builders.HasChildCountBindStatementBuilder;
+import poi.tb.processor.builders.HasContentDescriptionStatementBuilder;
+import poi.tb.processor.builders.HasFocusStatementBuilder;
+import poi.tb.processor.builders.HasLinksStatementBuilder;
 import poi.tb.processor.builders.IsAssignableFromBindStatementBuilder;
 import poi.tb.processor.builders.IsCheckedBindStatementBuilder;
 import poi.tb.processor.builders.IsClickableBindStatementBuilder;
@@ -47,6 +50,7 @@ import poi.tb.processor.builders.IsJavascriptEnabledStatementBuilder;
 import poi.tb.processor.builders.IsNotCheckedStatementBuilder;
 import poi.tb.processor.builders.IsRootStatementBuilder;
 import poi.tb.processor.builders.IsSelectedStatementBuilder;
+import poi.tb.processor.builders.SupportsInputMethodsStatementBuilder;
 import poi.tb.processor.builders.WithAlphaBindStatementBuilder;
 import poi.tb.processor.builders.WithContentDescriptionBindStatementBuilder;
 import poi.tb.processor.builders.WithEffectiveVisibilityBindStatementBuilder;
@@ -233,6 +237,9 @@ public class PoiProcessor extends AbstractProcessor {
 
         result.add(new HasBackgroundBindStatementBuilder(messager));
         result.add(new HasChildCountBindStatementBuilder(messager));
+        result.add(new HasContentDescriptionStatementBuilder(messager));
+        result.add(new HasFocusStatementBuilder(messager));
+        result.add(new HasLinksStatementBuilder(messager));
 
         result.add(new IsAssignableFromBindStatementBuilder(messager));
         result.add(new IsCheckedBindStatementBuilder(messager));
@@ -260,6 +267,8 @@ public class PoiProcessor extends AbstractProcessor {
         result.add(new WithSubstringBindStatementBuilder(messager));
         result.add(new WithTagKeyBindStatementBuilder(messager));
         result.add(new WithTextBindStatementBuilder(messager));
+
+        result.add(new SupportsInputMethodsStatementBuilder(messager));
 
         return result;
     }

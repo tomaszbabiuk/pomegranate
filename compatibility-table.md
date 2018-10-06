@@ -44,20 +44,20 @@
 | isSelected()                              | @IsSelected()                                         |
 | hasBackground(int)                        | @HasBackground(@DrawableRes int)                      |
 | hasChildCount(int)                        | @HasChildCount(int)                                   |
-| hasContentDescription()                   | *)                                                    |
+| hasContentDescription()                   | @HasContentDescription()                              |
 | hasDescendant(Matcher<View>)              | [use custom matcher](use-custom-matcher.md)           |
 | hasErrorText(Matcher<String>)             | [use custom matcher](use-custom-matcher.md)           |
 | hasErrorText(String)                      | *)                                                    |
-| hasFocus()                                | *)                                                    |
+| hasFocus()                                | @HasFocus()                                           |
 | hasImeAction(int)                         | *)                                                    |
 | hasImeAction(Matcher<Integer>)            | [use custom matcher](use-custom-matcher.md)           |
-| hasLinks()                                | *)                                                    |
+| hasLinks()                                | @HasLinks()                                           |
 | hasMinimumChildCount(int)                 | *)                                                    |
 | hasSibling(Matcher<View>)                 | [use custom matcher](use-custom-matcher.md)           |
 | hasTextColor(int)                         | *)                                                    |
 | assertThat(T, Matcher<T>)                 | This approach is against Page Object Model pattern.   |
 | assertThat(String, T, Matcher<T>)         | This approach is against Page Object Model pattern.   |
-| supportsInputMethods()                    | *)                                                    |
+| supportsInputMethods()                    | @SupportsInputMethods()                               |
 
 ```
 *) available soon, for now please use custom matcher

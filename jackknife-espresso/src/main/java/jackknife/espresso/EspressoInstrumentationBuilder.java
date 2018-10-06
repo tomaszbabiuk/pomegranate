@@ -20,6 +20,9 @@ import jackknife.pageobject.InstrumentedView;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.hasBackground;
 import static android.support.test.espresso.matcher.ViewMatchers.hasChildCount;
+import static android.support.test.espresso.matcher.ViewMatchers.hasContentDescription;
+import static android.support.test.espresso.matcher.ViewMatchers.hasFocus;
+import static android.support.test.espresso.matcher.ViewMatchers.hasLinks;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
@@ -33,6 +36,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isJavascriptEna
 import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.isSelected;
+import static android.support.test.espresso.matcher.ViewMatchers.supportsInputMethods;
 import static android.support.test.espresso.matcher.ViewMatchers.withAlpha;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -219,6 +223,26 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     @Override
     public void appendHasChildCountMatcher(final int childCount) {
         matchers.add(hasChildCount(childCount));
+    }
+
+    @Override
+    public void appendHasContentDescriptionMatcher() {
+        matchers.add(hasContentDescription());
+    }
+
+    @Override
+    public void appendSupportsInputMethodsMatcher() {
+        matchers.add(supportsInputMethods());
+    }
+
+    @Override
+    public void appendHasFocusMatcher() {
+        matchers.add(hasFocus());
+    }
+
+    @Override
+    public void appendHasLinksMatcher() {
+        matchers.add(hasLinks());
     }
 
     @NonNull

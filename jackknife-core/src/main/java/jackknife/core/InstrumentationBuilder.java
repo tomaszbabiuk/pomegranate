@@ -72,4 +72,12 @@ public interface InstrumentationBuilder {
     void appendHasBackgroundMatcher(@DrawableRes int drawableResId);
 
     void appendHasChildCountMatcher(int childCount);
+
+    void appendHasContentDescriptionMatcher();
+
+    void appendSupportsInputMethodsMatcher();
+
+    void appendHasFocusMatcher();
+
+    void appendHasLinksMatcher();
 }
