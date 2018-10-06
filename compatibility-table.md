@@ -42,8 +42,8 @@
 | isNotChecked()                            | @IsNotChecked()                                       |       
 | isRoot()                                  | @IsRoot()                                             |
 | isSelected()                              | @IsSelected()                                         |
-| hasBackground(int)                        | *)                                                    |
-| hasChildCount(int)                        | *)                                                    |
+| hasBackground(int)                        | @HasBackground(@DrawableRes int)                      |
+| hasChildCount(int)                        | @HasChildCount(int)                                   |
 | hasContentDescription()                   | *)                                                    |
 | hasDescendant(Matcher<View>)              | [use custom matcher](use-custom-matcher.md)           |
 | hasErrorText(Matcher<String>)             | [use custom matcher](use-custom-matcher.md)           |

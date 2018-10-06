@@ -3,6 +3,8 @@ package poi.tb.sample.pageobject;
 import android.text.InputType;
 import android.widget.EditText;
 
+import jackknife.annotations.HasBackground;
+import jackknife.annotations.HasChildCount;
 import jackknife.annotations.IsAssignableFrom;
 import jackknife.annotations.IsChecked;
 import jackknife.annotations.IsClickable;
@@ -59,6 +61,8 @@ public class MishMashPageObject {
     @IsRoot()
     @IsSelected()
     @IsNotChecked()
+    @HasBackground(R.drawable.ic_launcher_background)
+    @HasChildCount(5)
     public InstrumentedView mishmash1;
 
 

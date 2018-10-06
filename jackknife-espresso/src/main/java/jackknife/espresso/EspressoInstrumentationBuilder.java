@@ -18,6 +18,8 @@ import jackknife.pageobject.InstrumentedTextView;
 import jackknife.pageobject.InstrumentedView;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.matcher.ViewMatchers.hasBackground;
+import static android.support.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
@@ -209,13 +211,23 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
         matchers.add(isEnabled());
     }
 
+    @Override
+    public void appendHasBackgroundMatcher(final int drawableResId) {
+        matchers.add(hasBackground(drawableResId));
+    }
+
+    @Override
+    public void appendHasChildCountMatcher(final int childCount) {
+        matchers.add(hasChildCount(childCount));
+    }
+
     @NonNull
     private ViewMatchers.Visibility mapToEspressoVisibility(final Visibility visibility) {
         switch (visibility) {
             case Gone:
                 return ViewMatchers.Visibility.GONE;
             case Invisible:
-                return  ViewMatchers.Visibility.VISIBLE;
+                return  ViewMatchers.Visibility.INVISIBLE;
             default:
                 return ViewMatchers.Visibility.VISIBLE;
         }

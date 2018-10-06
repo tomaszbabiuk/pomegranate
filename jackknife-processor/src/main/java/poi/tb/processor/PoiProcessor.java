@@ -32,6 +32,8 @@ import jackknife.core.InstrumentationBuilder;
 import jackknife.core.InstrumentationContext;
 import jackknife.core.InstrumentationContextResolver;
 import poi.tb.processor.builders.BindStatementBuilder;
+import poi.tb.processor.builders.HasBackgroundBindStatementBuilder;
+import poi.tb.processor.builders.HasChildCountBindStatementBuilder;
 import poi.tb.processor.builders.IsAssignableFromBindStatementBuilder;
 import poi.tb.processor.builders.IsCheckedBindStatementBuilder;
 import poi.tb.processor.builders.IsClickableBindStatementBuilder;
@@ -228,6 +230,9 @@ public class PoiProcessor extends AbstractProcessor {
 
     private Set<BindStatementBuilder> getSupportedAnnotations() {
         Set<BindStatementBuilder> result = new HashSet<>();
+
+        result.add(new HasBackgroundBindStatementBuilder(messager));
+        result.add(new HasChildCountBindStatementBuilder(messager));
 
         result.add(new IsAssignableFromBindStatementBuilder(messager));
         result.add(new IsCheckedBindStatementBuilder(messager));
