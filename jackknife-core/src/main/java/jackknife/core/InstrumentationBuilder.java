@@ -55,4 +55,16 @@ public interface InstrumentationBuilder {
     void appendIsClickableMatcher();
 
     void appendIsDisplayingAtLeastMatcher(int percent);
+
+    void appendIsFocusableMatcher();
+
+    void appendIsRootMatcher();
+
+    void appendIsSelectedMatcher();
+
+    void appendIsNotCheckedMatcher();
+
+    void appendIsJavascriptEnabledMatcher();
+
+    void appendIsEnabledMatcher();
 }

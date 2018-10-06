@@ -25,6 +25,12 @@ import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDis
 import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
+import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
+import static android.support.test.espresso.matcher.ViewMatchers.isFocusable;
+import static android.support.test.espresso.matcher.ViewMatchers.isJavascriptEnabled;
+import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
+import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
+import static android.support.test.espresso.matcher.ViewMatchers.isSelected;
 import static android.support.test.espresso.matcher.ViewMatchers.withAlpha;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -171,6 +177,36 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     @Override
     public void appendIsDisplayingAtLeastMatcher(final int percent) {
         matchers.add(isDisplayingAtLeast(percent));
+    }
+
+    @Override
+    public void appendIsFocusableMatcher() {
+        matchers.add(isFocusable());
+    }
+
+    @Override
+    public void appendIsRootMatcher() {
+        matchers.add(isRoot());
+    }
+
+    @Override
+    public void appendIsSelectedMatcher() {
+        matchers.add(isSelected());
+    }
+
+    @Override
+    public void appendIsNotCheckedMatcher() {
+        matchers.add(isNotChecked());
+    }
+
+    @Override
+    public void appendIsJavascriptEnabledMatcher() {
+        matchers.add(isJavascriptEnabled());
+    }
+
+    @Override
+    public void appendIsEnabledMatcher() {
+        matchers.add(isEnabled());
     }
 
     @NonNull

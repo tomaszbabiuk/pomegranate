@@ -10,6 +10,12 @@ import jackknife.annotations.IsCompletelyDisplayed;
 import jackknife.annotations.IsDescendantOfA;
 import jackknife.annotations.IsDisplayed;
 import jackknife.annotations.IsDisplayingAtLeast;
+import jackknife.annotations.IsEnabled;
+import jackknife.annotations.IsFocusable;
+import jackknife.annotations.IsJavascriptEnabled;
+import jackknife.annotations.IsNotChecked;
+import jackknife.annotations.IsRoot;
+import jackknife.annotations.IsSelected;
 import jackknife.annotations.Visibility;
 import jackknife.annotations.WithAlpha;
 import jackknife.annotations.WithContentDescription;
@@ -47,6 +53,12 @@ public class MishMashPageObject {
     @IsClickable()
     @IsCompletelyDisplayed()
     @IsDisplayingAtLeast(10)
+    @IsEnabled()
+    @IsFocusable()
+    @IsJavascriptEnabled()
+    @IsRoot()
+    @IsSelected()
+    @IsNotChecked()
     public InstrumentedView mishmash1;
 
 

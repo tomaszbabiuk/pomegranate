@@ -36,12 +36,12 @@
 | isDisplayingAtLeast(int)                  | @IsDisplayingAtLeast(int)                             |
 | isDescendantOfA(int)                      | @IsDescendantOfA(@ResId int)                          |
 | isDescendantOfA(Matcher<View>)            | [use custom matcher](use-custom-matcher.md)           |
-| isEnabled()                               | *)                                                    |
-| isFocusable()                             | *)                                                    |
-| isJavascriptEnabled()                     | *)                                                    |
-| isNotChecked()                            | *)                                                    |       
-| isRoot()                                  | *)                                                    |
-| isSelected()                              | *)                                                    |
+| isEnabled()                               | @IsEnabled()                                          |
+| isFocusable()                             | @IsFocusable()                                        |
+| isJavascriptEnabled()                     | @IsJavascriptEnabled()                                |
+| isNotChecked()                            | @IsNotChecked()                                       |       
+| isRoot()                                  | @IsRoot()                                             |
+| isSelected()                              | @IsSelected()                                         |
 | hasBackground(int)                        | *)                                                    |
 | hasChildCount(int)                        | *)                                                    |
 | hasContentDescription()                   | *)                                                    |

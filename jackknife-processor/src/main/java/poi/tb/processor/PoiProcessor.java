@@ -39,6 +39,12 @@ import poi.tb.processor.builders.IsCompletelyDisplayedBindStatementBuilder;
 import poi.tb.processor.builders.IsDescendantOfABindStatementBuilder;
 import poi.tb.processor.builders.IsDisplayedBindStatementBuilder;
 import poi.tb.processor.builders.IsDisplayingAtLeastBindStatementBuilder;
+import poi.tb.processor.builders.IsEnabledStatementBuilder;
+import poi.tb.processor.builders.IsFocusableStatementBuilder;
+import poi.tb.processor.builders.IsJavascriptEnabledStatementBuilder;
+import poi.tb.processor.builders.IsNotCheckedStatementBuilder;
+import poi.tb.processor.builders.IsRootStatementBuilder;
+import poi.tb.processor.builders.IsSelectedStatementBuilder;
 import poi.tb.processor.builders.WithAlphaBindStatementBuilder;
 import poi.tb.processor.builders.WithContentDescriptionBindStatementBuilder;
 import poi.tb.processor.builders.WithEffectiveVisibilityBindStatementBuilder;
@@ -230,6 +236,12 @@ public class PoiProcessor extends AbstractProcessor {
         result.add(new IsDescendantOfABindStatementBuilder(messager));
         result.add(new IsDisplayedBindStatementBuilder(messager));
         result.add(new IsDisplayingAtLeastBindStatementBuilder(messager));
+        result.add(new IsEnabledStatementBuilder(messager));
+        result.add(new IsFocusableStatementBuilder(messager));
+        result.add(new IsJavascriptEnabledStatementBuilder(messager));
+        result.add(new IsNotCheckedStatementBuilder(messager));
+        result.add(new IsRootStatementBuilder(messager));
+        result.add(new IsSelectedStatementBuilder(messager));
 
         result.add(new WithAlphaBindStatementBuilder(messager));
         result.add(new WithContentDescriptionBindStatementBuilder(messager));
