@@ -59,4 +59,4 @@
 | assertThat(String, T, Matcher<T>)         | This approach is against Page Object Model pattern.   |
 | supportsInputMethods()                    | *)                                     |
 
-* available soon, for now please use custom matcher
+* *)available soon, for now please use custom matcher
