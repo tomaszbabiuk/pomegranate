@@ -53,4 +53,6 @@ public interface InstrumentationBuilder {
     void appendIsCompletelyDisplayedMatcher();
 
     void appendIsClickableMatcher();
+
+    void appendIsDisplayingAtLeastMatcher(int percent);
 }

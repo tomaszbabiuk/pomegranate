@@ -9,6 +9,7 @@ import jackknife.annotations.IsClickable;
 import jackknife.annotations.IsCompletelyDisplayed;
 import jackknife.annotations.IsDescendantOfA;
 import jackknife.annotations.IsDisplayed;
+import jackknife.annotations.IsDisplayingAtLeast;
 import jackknife.annotations.Visibility;
 import jackknife.annotations.WithAlpha;
 import jackknife.annotations.WithContentDescription;
@@ -45,6 +46,7 @@ public class MishMashPageObject {
     @IsDisplayed()
     @IsClickable()
     @IsCompletelyDisplayed()
+    @IsDisplayingAtLeast(10)
     public InstrumentedView mishmash1;
 
 

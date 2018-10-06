@@ -24,6 +24,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
 import static android.support.test.espresso.matcher.ViewMatchers.withAlpha;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -165,6 +166,11 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     @Override
     public void appendIsClickableMatcher() {
         matchers.add(isClickable());
+    }
+
+    @Override
+    public void appendIsDisplayingAtLeastMatcher(final int percent) {
+        matchers.add(isDisplayingAtLeast(percent));
     }
 
     @NonNull

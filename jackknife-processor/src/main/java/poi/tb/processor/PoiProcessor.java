@@ -38,6 +38,7 @@ import poi.tb.processor.builders.IsClickableBindStatementBuilder;
 import poi.tb.processor.builders.IsCompletelyDisplayedBindStatementBuilder;
 import poi.tb.processor.builders.IsDescendantOfABindStatementBuilder;
 import poi.tb.processor.builders.IsDisplayedBindStatementBuilder;
+import poi.tb.processor.builders.IsDisplayingAtLeastBindStatementBuilder;
 import poi.tb.processor.builders.WithAlphaBindStatementBuilder;
 import poi.tb.processor.builders.WithContentDescriptionBindStatementBuilder;
 import poi.tb.processor.builders.WithEffectiveVisibilityBindStatementBuilder;
@@ -228,6 +229,7 @@ public class PoiProcessor extends AbstractProcessor {
         result.add(new IsCompletelyDisplayedBindStatementBuilder(messager));
         result.add(new IsDescendantOfABindStatementBuilder(messager));
         result.add(new IsDisplayedBindStatementBuilder(messager));
+        result.add(new IsDisplayingAtLeastBindStatementBuilder(messager));
 
         result.add(new WithAlphaBindStatementBuilder(messager));
         result.add(new WithContentDescriptionBindStatementBuilder(messager));

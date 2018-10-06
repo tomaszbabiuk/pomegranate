@@ -1,4 +1,4 @@
-# Espresso : Jack-knife compatibility table
+# Espresso & Jack-knife compatibility table
 | Espresso                                  | Jack-knife                                            |
 | ----------------------------------------- | ----------------------------------------------------- |
 | withAlpha(float)                          | @WithAlpha(float)                                     |
@@ -33,7 +33,7 @@
 | isDisplayed()                             | @IsDisplayed()                                        |
 | isClickable()                             | @IsClickable()                                        |
 | isCompletelyDisplayed()                   | @IsCompletelyDisplayed()                              |
-| isDisplayingAtLeast(int)                  | *)                                                    |
+| isDisplayingAtLeast(int)                  | @IsDisplayingAtLeast(int)                             |
 | isDescendantOfA(int)                      | @IsDescendantOfA(@ResId int)                          |
 | isDescendantOfA(Matcher<View>)            | [use custom matcher](use-custom-matcher.md)           |
 | isEnabled()                               | *)                                                    |
