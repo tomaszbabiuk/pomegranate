@@ -1,15 +1,16 @@
-package poi.tb.processor;
+package poi.tb.processor.builders;
 
 import com.squareup.javapoet.MethodSpec;
 
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.Name;
 
 import jackknife.annotations.WithId;
 
 public class WithIdBindStatementBuilder extends BindStatementBuilder<WithId> {
 
-    WithIdBindStatementBuilder() {
-        super(WithId.class);
+    public WithIdBindStatementBuilder(Messager messager) {
+        super(WithId.class, messager);
     }
 
     @Override

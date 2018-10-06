@@ -31,6 +31,13 @@ import javax.tools.Diagnostic;
 import jackknife.core.InstrumentationBuilder;
 import jackknife.core.InstrumentationContext;
 import jackknife.core.InstrumentationContextResolver;
+import poi.tb.processor.builders.BindStatementBuilder;
+import poi.tb.processor.builders.IsAssignableFromBindStatementBuilder;
+import poi.tb.processor.builders.IsDescendantOfABindStatementBuilder;
+import poi.tb.processor.builders.WithAlphaBindStatementBuilder;
+import poi.tb.processor.builders.WithIdBindStatementBuilder;
+import poi.tb.processor.builders.WithTagKeyBindStatementBuilder;
+import poi.tb.processor.builders.WithTextBindStatementBuilder;
 
 public class PoiProcessor extends AbstractProcessor {
     private Messager messager;
@@ -138,7 +145,12 @@ public class PoiProcessor extends AbstractProcessor {
                                                           BindStatementBuilder<A> bindStatementBuilder) {
         A annotation = annotatedField.getAnnotation(bindStatementBuilder.getAnnotationClass());
         if (annotation != null) {
-            bindStatementBuilder.build(bindMethodBuilder, annotatedField.getSimpleName(), annotation);
+            if (bindStatementBuilder.check(annotation)) {
+                bindStatementBuilder.build(bindMethodBuilder, annotatedField.getSimpleName(), annotation);
+            } else {
+                messager.printMessage(Diagnostic.Kind.ERROR, "Error processing annotation: " +
+                        annotation.getClass() + ", field: " + annotatedField.getSimpleName());
+            }
         }
     }
 
@@ -198,11 +210,12 @@ public class PoiProcessor extends AbstractProcessor {
     private Set<BindStatementBuilder> getSupportedAnnotations() {
         Set<BindStatementBuilder> result = new HashSet<>();
 
-        result.add(new WithIdBindStatementBuilder());
-        result.add(new IsDescendantOfABindStatementBuilder());
-        result.add(new IsAssignableFromBindStatementBuilder());
-        result.add(new WithTagKeyBindStatementBuilder());
-        result.add(new WithTextBindStatementBuilder());
+        result.add(new WithAlphaBindStatementBuilder(messager));
+        result.add(new WithIdBindStatementBuilder(messager));
+        result.add(new IsDescendantOfABindStatementBuilder(messager));
+        result.add(new IsAssignableFromBindStatementBuilder(messager));
+        result.add(new WithTagKeyBindStatementBuilder(messager));
+        result.add(new WithTextBindStatementBuilder(messager));
 
         return result;
     }

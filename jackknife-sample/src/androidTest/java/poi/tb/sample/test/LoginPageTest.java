@@ -28,7 +28,7 @@ public class LoginPageTest {
 
     @Before
     public void setup() {
-        InstrumentationContextResolver.set(new EspressoInstrumentationContext());
+        InstrumentationContextResolver.set(new EspressoInstrumentationContext(InstrumentationRegistry.getTargetContext()));
         loginActivityTestRule.launchActivity(ACTIVITY_INTENT);
     }
 

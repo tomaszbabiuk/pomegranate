@@ -4,8 +4,10 @@ import android.widget.EditText;
 
 import jackknife.annotations.IsAssignableFrom;
 import jackknife.annotations.IsDescendantOfA;
+import jackknife.annotations.WithAlpha;
 import jackknife.annotations.WithId;
 import jackknife.annotations.WithTagKey;
+import jackknife.annotations.WithText;
 import jackknife.generated.PageObjectBinder;
 import jackknife.pageobject.InstrumentedTextView;
 import jackknife.pageobject.InstrumentedView;
@@ -25,7 +27,8 @@ public class LoginPageObject extends PageObject {
     @WithTagKey(R.id.checkable)
     public InstrumentedView termsAndConditionsCheck;
 
-    @WithId(R.id.login_button)
+    @WithText(fromResource = R.string.login)
+    @WithAlpha(0.1f)
     public InstrumentedView login;
 
     public LoginPageObject() {

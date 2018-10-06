@@ -1,15 +1,16 @@
-package poi.tb.processor;
+package poi.tb.processor.builders;
 
 import com.squareup.javapoet.MethodSpec;
 
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.Name;
 
 import jackknife.annotations.IsDescendantOfA;
 
 public class IsDescendantOfABindStatementBuilder extends BindStatementBuilder<IsDescendantOfA> {
 
-    IsDescendantOfABindStatementBuilder() {
-        super(IsDescendantOfA.class);
+    public IsDescendantOfABindStatementBuilder(Messager messager) {
+        super(IsDescendantOfA.class, messager);
     }
 
     @Override
