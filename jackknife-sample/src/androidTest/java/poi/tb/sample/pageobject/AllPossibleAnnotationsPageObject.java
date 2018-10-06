@@ -4,13 +4,18 @@ import android.widget.EditText;
 
 import jackknife.annotations.IsAssignableFrom;
 import jackknife.annotations.IsDescendantOfA;
-import jackknife.annotations.WithId;
+import jackknife.annotations.Visibility;
+import jackknife.annotations.WithAlpha;
+import jackknife.annotations.WithContentDescription;
+import jackknife.annotations.WithEffectiveVisibility;
+import jackknife.annotations.WithTagKey;
+import jackknife.annotations.WithText;
 import jackknife.generated.PageObjectBinder;
 import jackknife.pageobject.InstrumentedTextView;
 import jackknife.pageobject.InstrumentedView;
 import poi.tb.sample.R;
 
-public class LoginPageObject {
+public class AllPossibleAnnotationsPageObject {
 
     @IsAssignableFrom(EditText.class)
     @IsDescendantOfA(R.id.first_name_input)
@@ -20,13 +25,17 @@ public class LoginPageObject {
     @IsDescendantOfA(R.id.last_name_input)
     public InstrumentedTextView lastName;
 
-    @WithId(R.id.terms_and_conditions_check)
+    @WithTagKey(R.id.checkable)
     public InstrumentedView termsAndConditionsCheck;
 
-    @WithId(R.id.login_button)
-    public InstrumentedView login;
+    @WithText(fromResource = R.string.login)
+    @WithAlpha(0.1f)
+    @WithContentDescription("aaaa")
+    @WithEffectiveVisibility(Visibility.Gone)
+    public InstrumentedView mishmash;
 
-    public LoginPageObject() {
+    public AllPossibleAnnotationsPageObject() {
         PageObjectBinder.bind(this);
     }
+
 }

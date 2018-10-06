@@ -3,6 +3,7 @@ package jackknife.core;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 
+import jackknife.annotations.Visibility;
 import jackknife.pageobject.InstrumentedView;
 
 public interface InstrumentationBuilder {
@@ -26,4 +27,6 @@ public interface InstrumentationBuilder {
     void appendWithTagKeyMatcher(int tagKey);
 
     void appendIsAssignableFromMatcher(Class clazz);
+
+    void appendWithEffectiveVisibilityMatcher(Visibility visibility);
 }

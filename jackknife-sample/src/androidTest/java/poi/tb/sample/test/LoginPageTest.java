@@ -33,7 +33,7 @@ public class LoginPageTest {
     }
 
     @Test
-    public void canChangeTabsWithoutCrashingAppTest() {
+    public void userCanLoginWithoutAppCrash() {
         LoginPageObject mainPage = new LoginPageObject();
         mainPage.firstName.typeText("jacky");
         mainPage.lastName.typeText("knifey");
