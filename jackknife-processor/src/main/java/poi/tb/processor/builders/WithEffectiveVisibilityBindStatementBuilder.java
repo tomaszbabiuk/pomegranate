@@ -7,7 +7,6 @@ import javax.lang.model.element.Name;
 
 import jackknife.annotations.Visibility;
 import jackknife.annotations.WithEffectiveVisibility;
-import jackknife.annotations.WithId;
 
 public class WithEffectiveVisibilityBindStatementBuilder extends BindStatementBuilder<WithEffectiveVisibility> {
 

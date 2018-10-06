@@ -16,9 +16,9 @@
 | withInputType(int)                        | @WithInputType(int)                                   |
 | withResourceName(String)                  | @WithResourceName(String)                             |
 | withResourceName(Matcher<String>)         | [use custom matcher](use-custom-matcher.md)           |
-| withSpinnerText(int)                      | *)                                                    |
+| withSpinnerText(int)                      | @WithSpinnerText(@StringRes int)                      |
+| withSpinnerText(String)                   | @WithSpinnerText(String)                              |
 | withSpinnerText(Matcher<String>)          | [use custom matcher](use-custom-matcher.md)           |
-| withSpinnerText(String)                   | *)                                                    |
 | withSubstring(String)                     | *)                                                    |
 | withTagKey(int)                           | @WithTagKey(int)                                      |
 | withTagKey(int, Matcher<Object>)          | [use custom matcher](use-custom-matcher.md)           |

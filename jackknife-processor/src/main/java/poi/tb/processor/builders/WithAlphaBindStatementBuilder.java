@@ -6,7 +6,6 @@ import javax.annotation.processing.Messager;
 import javax.lang.model.element.Name;
 
 import jackknife.annotations.WithAlpha;
-import jackknife.annotations.WithId;
 
 public class WithAlphaBindStatementBuilder extends BindStatementBuilder<WithAlpha> {
 

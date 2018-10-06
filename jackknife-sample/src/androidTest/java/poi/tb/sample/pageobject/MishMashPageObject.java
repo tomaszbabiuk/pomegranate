@@ -13,6 +13,7 @@ import jackknife.annotations.WithHint;
 import jackknife.annotations.WithId;
 import jackknife.annotations.WithInputType;
 import jackknife.annotations.WithResourceName;
+import jackknife.annotations.WithSpinnerText;
 import jackknife.annotations.WithTagKey;
 import jackknife.annotations.WithText;
 import jackknife.generated.PageObjectBinder;
@@ -31,6 +32,7 @@ public class MishMashPageObject {
     @WithText("Login")
     @WithInputType(InputType.TYPE_CLASS_PHONE)
     @WithResourceName("res.name")
+    @WithSpinnerText("spinnerText")
     public InstrumentedView mishmash1;
 
 
@@ -38,6 +40,7 @@ public class MishMashPageObject {
     @WithText(fromResource = R.string.login)
     @WithHint(fromResource = R.string.login)
     @WithContentDescription(fromResource = R.string.login)
+    @WithSpinnerText(fromResource = R.string.login)
     public InstrumentedView mishmash2;
 
     public MishMashPageObject() {

@@ -37,4 +37,8 @@ public interface InstrumentationBuilder {
     void appendWithInputTypeMatcher(int inputTypeFlags);
 
     void appendWithResourceNameMatcher(String resourceName);
+
+    void appendWithSpinnerTextMatcher(@StringRes int stringResId);
+
+    void appendWithSpinnerTextMatcher(String spinnerText);
 }
