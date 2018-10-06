@@ -3,7 +3,7 @@
 | ----------------------------------------- |-------------------|
 | withAlpha(float)                          | @WithAlpha(float) |
 | withContentDescription(String)            | not supported (*) |
-| withContentDescription(@StringRes int)    | not supported (*) |
+| withContentDescription(@StringRes int)    | @WithText(fromResource = @StringRes) |
 | withContentDescription(Matcher<String>)   | not supported (*) |
 | withChild(Matcher<View>)                  | not supported (*) |
 | withClassName(Matcher<String>)            | not supported (*) |
@@ -34,7 +34,7 @@
 | isClickable()                             | not supported (*) |
 | isCompletelyDisplayed()                   | not supported (*) |
 | isDisplayingAtLeast(int)                  | not supported (*) |
-| isDescendantOfA(int)                      | @IsDescendandOfA(@ResId int) |
+| isDescendantOfA(int)                      | @IsDescendantOfA(@ResId int) |
 | isDescendantOfA(Matcher<View>)            | not supported (*) |
 | isEnabled()                               | not supported (*) |
 | isFocusable()                             | not supported (*) |

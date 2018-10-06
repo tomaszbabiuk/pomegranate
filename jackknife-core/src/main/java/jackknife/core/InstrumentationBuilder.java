@@ -9,6 +9,12 @@ public interface InstrumentationBuilder {
 
     <T extends InstrumentedView> T build(Class<T> clazz);
 
+    void appendWithAlphaMatcher(float alpha);
+
+    void appendWithContentDescriptionMatcher(@StringRes int stringResId);
+
+    void appendWithContentDescriptionMatcher(String text);
+
     void appendWithIdMatcher(@IdRes final int id);
 
     void appendIsDescendantOfMatcher(@IdRes int id);
@@ -20,6 +26,4 @@ public interface InstrumentationBuilder {
     void appendWithTagKeyMatcher(int tagKey);
 
     void appendIsAssignableFromMatcher(Class clazz);
-
-    void appendWithAlphaMatcher(float alpha);
 }

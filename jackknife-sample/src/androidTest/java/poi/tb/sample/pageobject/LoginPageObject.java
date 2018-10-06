@@ -5,6 +5,7 @@ import android.widget.EditText;
 import jackknife.annotations.IsAssignableFrom;
 import jackknife.annotations.IsDescendantOfA;
 import jackknife.annotations.WithAlpha;
+import jackknife.annotations.WithContentDescription;
 import jackknife.annotations.WithId;
 import jackknife.annotations.WithTagKey;
 import jackknife.annotations.WithText;
@@ -29,6 +30,7 @@ public class LoginPageObject extends PageObject {
 
     @WithText(fromResource = R.string.login)
     @WithAlpha(0.1f)
+    @WithContentDescription("aaaa")
     public InstrumentedView login;
 
     public LoginPageObject() {

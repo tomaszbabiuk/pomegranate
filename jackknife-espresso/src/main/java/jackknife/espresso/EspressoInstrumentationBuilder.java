@@ -53,6 +53,17 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     }
 
     @Override
+    public void appendWithContentDescriptionMatcher(@StringRes final int stringResId) {
+        appendWithContentDescriptionMatcher(applicationContext.getString(stringResId));
+    }
+
+    @Override
+    public void appendWithContentDescriptionMatcher(final String text) {
+        matchers.add(ViewMatchers.withContentDescription(text));
+    }
+
+
+    @Override
     public void appendWithIdMatcher(@IdRes final int id) {
         matchers.add(withId(id));
     }

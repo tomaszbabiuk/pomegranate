@@ -35,6 +35,7 @@ import poi.tb.processor.builders.BindStatementBuilder;
 import poi.tb.processor.builders.IsAssignableFromBindStatementBuilder;
 import poi.tb.processor.builders.IsDescendantOfABindStatementBuilder;
 import poi.tb.processor.builders.WithAlphaBindStatementBuilder;
+import poi.tb.processor.builders.WithContentDescriptionBindStatementBuilder;
 import poi.tb.processor.builders.WithIdBindStatementBuilder;
 import poi.tb.processor.builders.WithTagKeyBindStatementBuilder;
 import poi.tb.processor.builders.WithTextBindStatementBuilder;
@@ -103,7 +104,7 @@ public class PoiProcessor extends AbstractProcessor {
         generateContextResolverStatement(bindMethodBuilder);
 
         for (VariableElement annotatedField : variableElements) {
-            bindMethodBuilder.addComment("Bindings for $T", annotatedField.asType());
+            bindMethodBuilder.addComment("Bindings for $S", annotatedField.getSimpleName());
             generateInstrumentationBuilderStatement(bindMethodBuilder, annotatedField);
             generateBindStatements(bindMethodBuilder, annotatedField);
             generateFinalBuildStatement(bindMethodBuilder, annotatedField);
@@ -216,6 +217,7 @@ public class PoiProcessor extends AbstractProcessor {
         result.add(new IsAssignableFromBindStatementBuilder(messager));
         result.add(new WithTagKeyBindStatementBuilder(messager));
         result.add(new WithTextBindStatementBuilder(messager));
+        result.add(new WithContentDescriptionBindStatementBuilder(messager));
 
         return result;
     }
