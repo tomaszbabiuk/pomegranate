@@ -81,4 +81,5 @@ public void canChangeTabsWithoutCrashingAppTest() {
         mainPage.test3.click();
 }
 ```
-Only declarative matchers are supported (the one that can be expressed as an annotation). See espresso [compatibility table](compatibility table).
+Only declarative matchers are supported (the one that can be expressed as an annotation). See espresso 
+[compatibility table](compatibility table).
