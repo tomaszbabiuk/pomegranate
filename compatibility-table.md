@@ -29,10 +29,10 @@
 | withParentIndex(int)                      | @WithParentIndex(int)                                 |
 | withParent(Matcher<View>)                 | [use custom matcher](use-custom-matcher.md)           |
 | isAssignableFrom(Class)                   | @IsAssignableFrom(Class)                              |
-| isDisplayed()                             | *)                                                    |
-| isChecked()                               | *)                                                    |
-| isClickable()                             | *)                                                    |
-| isCompletelyDisplayed()                   | *)                                                    |
+| isChecked()                               | @IsChecked()                                          |
+| isDisplayed()                             | @IsDisplayed()                                        |
+| isClickable()                             | @IsClickable()                                        |
+| isCompletelyDisplayed()                   | @IsCompletelyDisplayed()                              |
 | isDisplayingAtLeast(int)                  | *)                                                    |
 | isDescendantOfA(int)                      | @IsDescendantOfA(@ResId int)                          |
 | isDescendantOfA(Matcher<View>)            | [use custom matcher](use-custom-matcher.md)           |

@@ -19,7 +19,11 @@ import jackknife.pageobject.InstrumentedView;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
+import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
+import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withAlpha;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -66,7 +70,6 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     public void appendWithContentDescriptionMatcher(final String text) {
         matchers.add(ViewMatchers.withContentDescription(text));
     }
-
 
     @Override
     public void appendWithIdMatcher(@IdRes final int id) {
@@ -142,6 +145,26 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     @Override
     public void appendWithParentIndexMatcher(final int parentIndex) {
         matchers.add(withParentIndex(parentIndex));
+    }
+
+    @Override
+    public void appendIsDisplayedMatcher() {
+        matchers.add(isDisplayed());
+    }
+
+    @Override
+    public void appendIsCheckedMatcher() {
+        matchers.add(isChecked());
+    }
+
+    @Override
+    public void appendIsCompletelyDisplayedMatcher() {
+        matchers.add(isCompletelyDisplayed());
+    }
+
+    @Override
+    public void appendIsClickableMatcher() {
+        matchers.add(isClickable());
     }
 
     @NonNull

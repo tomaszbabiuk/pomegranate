@@ -45,4 +45,12 @@ public interface InstrumentationBuilder {
     void appendWithSubstringMatcher(String substring);
 
     void appendWithParentIndexMatcher(int parentIndex);
+
+    void appendIsDisplayedMatcher();
+
+    void appendIsCheckedMatcher();
+
+    void appendIsCompletelyDisplayedMatcher();
+
+    void appendIsClickableMatcher();
 }

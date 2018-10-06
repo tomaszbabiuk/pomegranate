@@ -33,7 +33,11 @@ import jackknife.core.InstrumentationContext;
 import jackknife.core.InstrumentationContextResolver;
 import poi.tb.processor.builders.BindStatementBuilder;
 import poi.tb.processor.builders.IsAssignableFromBindStatementBuilder;
+import poi.tb.processor.builders.IsCheckedBindStatementBuilder;
+import poi.tb.processor.builders.IsClickableBindStatementBuilder;
+import poi.tb.processor.builders.IsCompletelyDisplayedBindStatementBuilder;
 import poi.tb.processor.builders.IsDescendantOfABindStatementBuilder;
+import poi.tb.processor.builders.IsDisplayedBindStatementBuilder;
 import poi.tb.processor.builders.WithAlphaBindStatementBuilder;
 import poi.tb.processor.builders.WithContentDescriptionBindStatementBuilder;
 import poi.tb.processor.builders.WithEffectiveVisibilityBindStatementBuilder;
@@ -218,20 +222,25 @@ public class PoiProcessor extends AbstractProcessor {
     private Set<BindStatementBuilder> getSupportedAnnotations() {
         Set<BindStatementBuilder> result = new HashSet<>();
 
-        result.add(new WithAlphaBindStatementBuilder(messager));
-        result.add(new WithIdBindStatementBuilder(messager));
-        result.add(new IsDescendantOfABindStatementBuilder(messager));
         result.add(new IsAssignableFromBindStatementBuilder(messager));
-        result.add(new WithTagKeyBindStatementBuilder(messager));
-        result.add(new WithTextBindStatementBuilder(messager));
+        result.add(new IsCheckedBindStatementBuilder(messager));
+        result.add(new IsClickableBindStatementBuilder(messager));
+        result.add(new IsCompletelyDisplayedBindStatementBuilder(messager));
+        result.add(new IsDescendantOfABindStatementBuilder(messager));
+        result.add(new IsDisplayedBindStatementBuilder(messager));
+
+        result.add(new WithAlphaBindStatementBuilder(messager));
         result.add(new WithContentDescriptionBindStatementBuilder(messager));
         result.add(new WithEffectiveVisibilityBindStatementBuilder(messager));
         result.add(new WithHintBindStatementBuilder(messager));
+        result.add(new WithIdBindStatementBuilder(messager));
         result.add(new WithInputTypeBindStatementBuilder(messager));
+        result.add(new WithParentIndexBindStatementBuilder(messager));
         result.add(new WithResourceNameBindStatementBuilder(messager));
         result.add(new WithSpinnerTextBindStatementBuilder(messager));
         result.add(new WithSubstringBindStatementBuilder(messager));
-        result.add(new WithParentIndexBindStatementBuilder(messager));
+        result.add(new WithTagKeyBindStatementBuilder(messager));
+        result.add(new WithTextBindStatementBuilder(messager));
 
         return result;
     }

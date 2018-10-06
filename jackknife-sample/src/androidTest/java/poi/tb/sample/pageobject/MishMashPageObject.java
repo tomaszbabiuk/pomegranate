@@ -4,7 +4,11 @@ import android.text.InputType;
 import android.widget.EditText;
 
 import jackknife.annotations.IsAssignableFrom;
+import jackknife.annotations.IsChecked;
+import jackknife.annotations.IsClickable;
+import jackknife.annotations.IsCompletelyDisplayed;
 import jackknife.annotations.IsDescendantOfA;
+import jackknife.annotations.IsDisplayed;
 import jackknife.annotations.Visibility;
 import jackknife.annotations.WithAlpha;
 import jackknife.annotations.WithContentDescription;
@@ -37,6 +41,10 @@ public class MishMashPageObject {
     @WithSpinnerText("spinnerText")
     @WithSubstring("aaaa")
     @WithParentIndex(1)
+    @IsChecked()
+    @IsDisplayed()
+    @IsClickable()
+    @IsCompletelyDisplayed()
     public InstrumentedView mishmash1;
 
 
