@@ -14,7 +14,7 @@
 | withId(int)                               | @WithId(@ResId int)                                   |
 | withId(Matcher<Integer>)                  | [use custom matcher](use-custom-matcher.md)           |
 | withInputType(int)                        | @WithInputType(int)                                   |
-| withResourceName(String)                  | *)                                                    |
+| withResourceName(String)                  | @WithResourceName(String)                             |
 | withResourceName(Matcher<String>)         | [use custom matcher](use-custom-matcher.md)           |
 | withSpinnerText(int)                      | *)                                                    |
 | withSpinnerText(Matcher<String>)          | [use custom matcher](use-custom-matcher.md)           |

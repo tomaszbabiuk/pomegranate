@@ -40,6 +40,7 @@ import poi.tb.processor.builders.WithEffectiveVisibilityBindStatementBuilder;
 import poi.tb.processor.builders.WithHintBindStatementBuilder;
 import poi.tb.processor.builders.WithIdBindStatementBuilder;
 import poi.tb.processor.builders.WithInputTypeBindStatementBuilder;
+import poi.tb.processor.builders.WithResourceNameBindStatementBuilder;
 import poi.tb.processor.builders.WithTagKeyBindStatementBuilder;
 import poi.tb.processor.builders.WithTextBindStatementBuilder;
 
@@ -224,6 +225,7 @@ public class PoiProcessor extends AbstractProcessor {
         result.add(new WithEffectiveVisibilityBindStatementBuilder(messager));
         result.add(new WithHintBindStatementBuilder(messager));
         result.add(new WithInputTypeBindStatementBuilder(messager));
+        result.add(new WithResourceNameBindStatementBuilder(messager));
 
         return result;
     }

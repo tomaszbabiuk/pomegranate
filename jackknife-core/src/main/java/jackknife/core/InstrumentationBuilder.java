@@ -35,4 +35,6 @@ public interface InstrumentationBuilder {
     void appendWithEffectiveVisibilityMatcher(Visibility visibility);
 
     void appendWithInputTypeMatcher(int inputTypeFlags);
+
+    void appendWithResourceNameMatcher(String resourceName);
 }

@@ -24,6 +24,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withAlpha;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withInputType;
+import static android.support.test.espresso.matcher.ViewMatchers.withResourceName;
 import static org.hamcrest.core.AllOf.allOf;
 
 public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
@@ -113,6 +114,11 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     @Override
     public void appendWithInputTypeMatcher(final int inputTypeFlags) {
         matchers.add(withInputType(inputTypeFlags));
+    }
+
+    @Override
+    public void appendWithResourceNameMatcher(final String resourceName) {
+        matchers.add(withResourceName(resourceName));
     }
 
     @NonNull

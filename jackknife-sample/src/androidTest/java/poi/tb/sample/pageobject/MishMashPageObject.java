@@ -12,13 +12,14 @@ import jackknife.annotations.WithEffectiveVisibility;
 import jackknife.annotations.WithHint;
 import jackknife.annotations.WithId;
 import jackknife.annotations.WithInputType;
+import jackknife.annotations.WithResourceName;
 import jackknife.annotations.WithTagKey;
 import jackknife.annotations.WithText;
 import jackknife.generated.PageObjectBinder;
 import jackknife.pageobject.InstrumentedView;
 import poi.tb.sample.R;
 
-public class AllPossibleAnnotationsPageObject {
+public class MishMashPageObject {
     @IsAssignableFrom(EditText.class)
     @IsDescendantOfA(R.id.login_button)
     @WithAlpha(0.1f)
@@ -29,6 +30,7 @@ public class AllPossibleAnnotationsPageObject {
     @WithTagKey(R.id.checkable)
     @WithText("Login")
     @WithInputType(InputType.TYPE_CLASS_PHONE)
+    @WithResourceName("res.name")
     public InstrumentedView mishmash1;
 
 
@@ -38,7 +40,7 @@ public class AllPossibleAnnotationsPageObject {
     @WithContentDescription(fromResource = R.string.login)
     public InstrumentedView mishmash2;
 
-    public AllPossibleAnnotationsPageObject() {
+    public MishMashPageObject() {
         PageObjectBinder.bind(this);
     }
 
