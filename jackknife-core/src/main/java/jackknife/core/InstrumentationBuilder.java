@@ -33,4 +33,6 @@ public interface InstrumentationBuilder {
     void appendIsAssignableFromMatcher(Class clazz);
 
     void appendWithEffectiveVisibilityMatcher(Visibility visibility);
+
+    void appendWithInputTypeMatcher(int inputTypeFlags);
 }

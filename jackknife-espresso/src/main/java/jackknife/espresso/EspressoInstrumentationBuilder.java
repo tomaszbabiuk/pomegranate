@@ -23,6 +23,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA
 import static android.support.test.espresso.matcher.ViewMatchers.withAlpha;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withInputType;
 import static org.hamcrest.core.AllOf.allOf;
 
 public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
@@ -107,6 +108,11 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     public void appendWithEffectiveVisibilityMatcher(final Visibility visibility) {
         ViewMatchers.Visibility espressoVisibility = mapToEspressoVisibility(visibility);
         matchers.add(withEffectiveVisibility(espressoVisibility));
+    }
+
+    @Override
+    public void appendWithInputTypeMatcher(final int inputTypeFlags) {
+        matchers.add(withInputType(inputTypeFlags));
     }
 
     @NonNull

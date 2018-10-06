@@ -1,5 +1,6 @@
 package poi.tb.sample.pageobject;
 
+import android.text.InputType;
 import android.widget.EditText;
 
 import jackknife.annotations.IsAssignableFrom;
@@ -10,6 +11,7 @@ import jackknife.annotations.WithContentDescription;
 import jackknife.annotations.WithEffectiveVisibility;
 import jackknife.annotations.WithHint;
 import jackknife.annotations.WithId;
+import jackknife.annotations.WithInputType;
 import jackknife.annotations.WithTagKey;
 import jackknife.annotations.WithText;
 import jackknife.generated.PageObjectBinder;
@@ -26,6 +28,7 @@ public class AllPossibleAnnotationsPageObject {
     @WithHint("Login")
     @WithTagKey(R.id.checkable)
     @WithText("Login")
+    @WithInputType(InputType.TYPE_CLASS_PHONE)
     public InstrumentedView mishmash1;
 
 
