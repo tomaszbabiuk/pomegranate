@@ -82,4 +82,4 @@ public void canChangeTabsWithoutCrashingAppTest() {
 }
 ```
 Only declarative matchers are supported (the one that can be expressed as an annotation). See espresso 
-[compatibility table](compatibility table).
+[compatibility table](compatibility-table.md).
