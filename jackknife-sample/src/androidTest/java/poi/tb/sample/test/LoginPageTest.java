@@ -37,7 +37,7 @@ public class LoginPageTest {
         LoginPageObject mainPage = new LoginPageObject();
         mainPage.firstName.typeText("jacky");
         mainPage.lastName.typeText("knifey");
-        mainPage.termsAndConditionsCheck.click();
+        mainPage.termsAndConditionsCheck.setChecked(true);
         mainPage.login.click();
     }
 }

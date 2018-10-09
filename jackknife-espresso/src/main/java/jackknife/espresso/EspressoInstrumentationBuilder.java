@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 import jackknife.annotations.Visibility;
 import jackknife.core.InstrumentationBuilder;
+import jackknife.pageobject.InstrumentedCheckableView;
+import jackknife.pageobject.InstrumentedEditView;
 import jackknife.pageobject.InstrumentedTextView;
 import jackknife.pageobject.InstrumentedView;
 
@@ -53,7 +55,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withSubstring;
 import static org.hamcrest.core.AllOf.allOf;
 
 public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
-
     private ArrayList<Matcher<? super View>> matchers;
     private Context applicationContext;
 
@@ -66,6 +67,15 @@ public class EspressoInstrumentationBuilder implements InstrumentationBuilder {
     public <T extends InstrumentedView> T build(final Class<T> clazz) {
         Matcher matcher = matchers.size() > 1 ? allOf(matchers) : matchers.get(0);
         ViewInteraction interaction = onView(matcher);
+
+        if (clazz.isAssignableFrom(InstrumentedEditView.class)) {
+            return (T) new EspressoInstrumentedEditView(interaction);
+        }
+
+        if (clazz.isAssignableFrom(InstrumentedCheckableView.class)) {
+            return (T) new EspressoInstrumentedCheckableView(interaction);
+        }
+
 
         if (clazz.isAssignableFrom(InstrumentedTextView.class)) {
             return (T) new EspressoInstrumentedTextView(interaction);

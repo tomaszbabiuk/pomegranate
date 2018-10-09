@@ -1,6 +1,5 @@
 package jackknife.espresso;
 
-
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
 

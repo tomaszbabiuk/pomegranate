@@ -5,6 +5,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 
 import java.util.Objects;
@@ -14,7 +15,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout firstNameInput;
     private TextInputLayout lastNameInput;
-    private CheckedTextView termsAndConditionsCheck;
+    private CheckBox termsAndConditionsCheck;
     private Button loginButton;
 
     @Override

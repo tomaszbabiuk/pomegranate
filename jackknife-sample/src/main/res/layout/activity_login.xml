@@ -36,14 +36,16 @@
     </android.support.design.widget.TextInputLayout>
 
 
-    <CheckedTextView
+    <android.support.v7.widget.AppCompatCheckBox
         android:id="@+id/terms_and_conditions_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checkMark="?android:listChoiceIndicatorMultiple"
-        android:checked="true"
+        android:checked="false"
+        android:clickable="true"
         android:gravity="center_vertical"
-        android:text="@string/do_you_agree_to_terms_and_conditions" />
+        android:text="@string/do_you_agree_to_terms_and_conditions"
+        android:focusable="true" />
 
     <Button
         android:id="@+id/login_button"
