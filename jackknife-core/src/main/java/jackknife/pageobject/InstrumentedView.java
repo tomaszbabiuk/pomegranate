@@ -29,4 +29,30 @@ public interface InstrumentedView {
     void swipeUp();
 
     void swipeDown();
+
+    void assertIsRoot();
+
+    void assertIsAssignableFrom(Class clazz);
+
+    void assertIsChecked();
+
+    void assertIsClickable();
+
+    void assertIsCompletelyDisplayed();
+
+    void assertIsDisplayed();
+
+    void assertIsDisplayedAtLeast(int areaPercentage);
+
+    void assertIsEnabled();
+
+    void assertIsJavascriptEnabled();
+
+    void assertIsNotChecked();
+
+    void assertIsSelected();
+
+    void assertDoesNotExist();
+
+    void assertIsFocusable();
 }

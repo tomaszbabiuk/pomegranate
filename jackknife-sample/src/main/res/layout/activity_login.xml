@@ -50,6 +50,7 @@
     <Button
         android:id="@+id/login_button"
         android:onClick="onLoginClick"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/validate_and_go_next" />
