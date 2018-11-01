@@ -5,10 +5,10 @@ import android.widget.EditText;
 import jackknife.annotations.IsAssignableFrom;
 import jackknife.annotations.IsDescendantOfA;
 import jackknife.annotations.WithId;
+import jackknife.espresso.EspressoInstrumentedView;
 import jackknife.generated.PageObjectBinder;
 import jackknife.pageobject.InstrumentedCheckableView;
 import jackknife.pageobject.InstrumentedEditView;
-import jackknife.pageobject.InstrumentedView;
 import poi.tb.sample.R;
 
 public class LoginPageObject {
@@ -25,7 +25,7 @@ public class LoginPageObject {
     public InstrumentedCheckableView termsAndConditionsCheck;
 
     @WithId(R.id.login_button)
-    public InstrumentedView login;
+    public EspressoInstrumentedView login;
 
     public LoginPageObject() {
         PageObjectBinder.bind(this);
