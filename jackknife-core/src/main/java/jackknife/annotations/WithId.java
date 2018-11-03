@@ -10,6 +10,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.SOURCE)
 public @interface WithId {
-    /** View ID to which the field will be bound. */
     @IdRes int value();
 }
