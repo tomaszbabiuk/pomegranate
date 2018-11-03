@@ -16,7 +16,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -30,7 +29,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation project(':jackknife-core')
-    androidTestImplementation project(':jackknife-espresso')
-    androidTestAnnotationProcessor project(":jackknife-processor")
+    androidTestImplementation 'com.github.tomaszbabiuk.jackknife:jackknife-core:129dba68212b7c8f739710995fb16353e8ac4d21'
+    androidTestImplementation 'com.github.tomaszbabiuk.jackknife:jackknife-espresso:129dba68212b7c8f739710995fb16353e8ac4d21'
+    androidTestImplementation 'com.github.tomaszbabiuk.jackknife:jackknife-processor:129dba68212b7c8f739710995fb16353e8ac4d21'
+//    androidTestImplementation project(':jackknife-core')
+//    androidTestImplementation project(':jackknife-espresso')
+//    androidTestAnnotationProcessor project(":jackknife-processor")
 }

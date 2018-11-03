@@ -81,3 +81,5 @@ public void canChangeTabsWithoutCrashingAppTest() {
         mainPage.test3.click();
 }
 ```
+
+# Getting started
