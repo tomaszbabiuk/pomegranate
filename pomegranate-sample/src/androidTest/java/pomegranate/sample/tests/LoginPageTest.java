@@ -1,4 +1,4 @@
-package pomegranade.sample.tests;
+package pomegranate.sample.tests;
 
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
