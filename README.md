@@ -1,15 +1,15 @@
-# Jack-knife
-JackKnife is Page Object injection framework for android automation tests. The goal of the framework is to reduce boilerplate code related with POM models.
+# POMegranate
+POMegranate is Page Object injection framework for android automation tests. The goal of the framework is to reduce boilerplate code related with POM models.
 
 # The idea
-If you write android UI automation tests you probably think of Espresso framework. Probably you even heard of Page Object Model pattern which helps you with reusing some of the code across your tests. But writing Page Objects is not always a pleasant task. It’s time consuming and you need to be really precise to achieve your goal. Jack-knife framework can help you in this tasks. 
+If you write android UI automation tests you probably think of Espresso framework. Probably you even heard of Page Object Model pattern which helps you with reusing some of the code across your tests. But writing Page Objects is not always a pleasant task. It’s time consuming and you need to be really precise to achieve your goal. POMegranate framework can help you in this tasks. 
 
-The inspiration for this framework comes from two projects: Selenium tools for web and ButterKnife framework for Android. Jack-knife combines both: boilerplate reduction and code generation.
+The inspiration for this framework comes from two projects: Selenium tools for web and ButterKnife framework for Android. POMegranate combines both: boilerplate reduction and code generation.
 
-Jack-Knife is using annotation processor to generate it's code when you build/run your tests. No reflection is used! Generated code is clean and self-describing.
+POMegranate is using annotation processor to generate it's code when you build/run your tests. No reflection is used! Generated code is clean and self-describing.
 
-# Sample Page Object Model with Jack-knife
-Here's how your Page Objects can look if you decide to use jack-knife:
+# Sample Page Object Model with POMegranate
+Here's how your Page Objects can look if you decide to use POMegranate:
 
 ```java
 public class LoginPageObject {
@@ -39,15 +39,15 @@ And now your automation test can quickly use POM from previous step. You don't e
     @Test
     public void userCanLoginWithoutAppCrash() {
         LoginPageObject mainPage = new LoginPageObject();
-        mainPage.firstName.typeText("jacky");
-        mainPage.lastName.typeText("knifey");
+        mainPage.firstName.typeText("pommer");
+        mainPage.lastName.typeText("granate");
         mainPage.termsAndConditionsCheck.click();
         mainPage.login.click();
     }
 ```
 
 # How much code you don't need to write?
-Let's look how much boilerplate has been generated for you by jack-knife. Now imagine that's the only one POM in your project!
+Let's look how much boilerplate has been generated for you by POMegranate. Now imagine that's the only one POM in your project!
 ```java
 public class PageObjectBinder {
   public static void bind(LoginPageObject target) {
@@ -79,6 +79,6 @@ public class PageObjectBinder {
 ```
 
 # Limitations
-As jack-knife uses annotations only declarative matchers are supported. That suits 90% percent of your code. You can always mix espresso with jack-knife, see [compatibility table](compatibility-table.md).
+As POMegranate uses annotations only declarative matchers are supported. That suits 90% percent of your code. You can always mix espresso with POMegranate, see [compatibility table](compatibility-table.md).
 
 # Getting started
