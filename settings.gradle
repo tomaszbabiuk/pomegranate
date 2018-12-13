@@ -1,1 +1,1 @@
-include ':jackknife-sample', ':jackknife-processor', ':jackknife-core', ':jackknife-espresso'
+include ':pomegranate-sample', ':pomegranate-processor', ':pomegranate-core', ':pomegranate-espresso'
