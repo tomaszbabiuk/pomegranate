@@ -4,7 +4,6 @@ import android.text.InputType;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
-import poi.tb.sample.R;
 import pomegranate.annotations.HasBackground;
 import pomegranate.annotations.HasChildCount;
 import pomegranate.annotations.HasContentDescription;
@@ -43,6 +42,7 @@ import pomegranate.annotations.WithTagKey;
 import pomegranate.annotations.WithText;
 import pomegranate.generated.PageObjectBinder;
 import pomegranate.pageobject.InstrumentedView;
+import pomegranate.sample.R;
 
 public class MishMashPageObject {
     @IsAssignableFrom(EditText.class)

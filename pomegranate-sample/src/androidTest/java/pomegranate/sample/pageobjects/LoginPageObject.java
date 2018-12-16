@@ -9,7 +9,8 @@ import pomegranate.espresso.EspressoInstrumentedView;
 import pomegranate.generated.PageObjectBinder;
 import pomegranate.pageobject.InstrumentedCheckableView;
 import pomegranate.pageobject.InstrumentedEditView;
-import poi.tb.sample.R;
+import pomegranate.sample.R;
+
 
 public class LoginPageObject {
 

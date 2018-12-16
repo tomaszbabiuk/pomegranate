@@ -8,7 +8,7 @@ import pomegranate.espresso.EspressoInstrumentedTextView;
 import pomegranate.generated.PageObjectBinder;
 import pomegranate.pageobject.InstrumentedTextView;
 import pomegranate.pageobject.PageObject;
-import poi.tb.sample.R;
+import pomegranate.sample.R;
 
 import static android.support.test.espresso.Espresso.onView;
 
