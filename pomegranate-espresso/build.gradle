@@ -1,7 +1,26 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-plugin:1.2'
+    }
+}
+
+repositories {
+    google()
+    jcenter()
+}
+
+group = 'com.github.tomaszbabiuk'
+version = '0.1.0'
+
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-
-group='com.github.tomaszbabiuk'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 27
@@ -29,5 +48,84 @@ dependencies {
     api 'com.android.support.test.espresso:espresso-core:3.0.2'
     api 'com.android.support.test:runner:1.0.2'
     api 'com.android.support.test:rules:1.0.2'
-    api project(':pomegranate-core')
+    api 'com.github.tomaszbabiuk:pomegranate-core:0.1.0-SNAPSHOT'
+//    api ':pomegranate-core'
+}
+
+
+def siteUrl = 'https://github.com/tomaszbabiuk/pomegranate'
+def gitUrl = 'https://github.com/tomaszbabiuk/pomegranate.git'
+
+bintray {
+    Properties properties = new Properties()
+    InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream() ;
+    properties.load( inputStream )
+    user = properties.getProperty('bintray.user')
+    key = properties.getProperty('bintray.key')
+
+    configurations = ['archives']
+    pkg {
+        repo = 'pomegranate'
+        name = project.name
+        desc = 'POMegranate is page object injection framework for android automation tests.'
+        websiteUrl = siteUrl
+        issueTrackerUrl = 'https://github.com/tomaszbabiuk/pomegranate/issues'
+        vcsUrl = gitUrl
+        licenses = ['Apache-2.0']
+        labels = ['aar', 'android', 'example']
+        publicDownloadNumbers = true
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name 'POMegranate Android'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'tomaszbabiuk'
+                        name 'Tomasz Babiuk'
+                        email 'tomasz.babiuk@gmail.com'
+                    }
+                }
+                scm {
+                    connection 'https://github.com/tomaszbabiuk/pomegranate.git'
+                    developerConnection 'https://github.com/tomaszbabiuk/pomegranate.git'
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+task findConventions << {
+    println project.getConvention()
 }
