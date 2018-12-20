@@ -1,22 +1,29 @@
 # POMegranate
-POMegranate is Page Object injection framework for android automation tests. The goal of the framework is to reduce boilerplate code related with POM models.
+POMegranate is Page Object injection framework for android automation tests. The goal of the framework is to reduce boilerplate code related with POM models and automation tests.
 
 # The idea
-If you write android UI automation tests you probably think of Espresso framework. Probably you even heard of Page Object Model pattern which helps you with reusing some of the code across your tests. But writing Page Objects is not always a pleasant task. It’s time consuming and you need to be really precise to achieve your goal. POMegranate framework can help you in this tasks. 
+If you write android UI automation tests you probably think of Espresso framework. Probably you even heard of Page Object Model pattern which helps you to reuse some of the code across your tests. But writing Page Objects is not always a pleasant task. It’s time consuming and you need to be really precise to achieve your goal. POMegranate framework can help you here. 
 
 The inspiration for this framework comes from two projects: Selenium tools for web and ButterKnife framework for Android. POMegranate combines both: boilerplate reduction and code generation.
 
-POMegranate is using annotation processor to generate it's code when you build/run your tests. No reflection is used! Generated code is clean and self-describing.
+POMegranate is using annotation processor to generate it's code when you build/run your automation tests. No reflection is used! Generated code is clean and self-describing.
+
+#Benefits
+1) It's much easier to use Page Object Model pattern (https://martinfowler.com/bliki/PageObject.html) on Android
+2) If yot use Selenium for web automation before, it's gonna be easier for you to switch to Android tests (https://www.seleniumhq.org/docs/06_test_design_considerations.jsp#page-object-design-pattern)
+3) Declarative code is cleaner and self describing
+4) POMegranate uses annotation processing, so it's fast (no reflection)
+5) You can always mix Espresso with POMegranate in edge cases.
 
 # How to use?
-Add pomegranate repository to your project's gradle file
+Add POMegranate repository to your project's gradle file
 ```groovy
 repositories {
     maven { url "https://dl.bintray.com/tomaszbabiuk/pomegranate" }
 }
 ```
 
-And use pomegranate packets:
+And use POMegranate packets:
 ```groovy
     androidTestImplementation 'com.github.tomaszbabiuk:pomegranate-core:0.1.0'
     androidTestImplementation 'com.github.tomaszbabiuk:pomegranate-espresso:0.1.0'
@@ -96,10 +103,10 @@ public class PageObjectBinder {
 ```
 
 # Limitations
-POMegranate uses annotations. Only declarative matchers are supported. That suits 90% percent of your code. You can always mix espresso with POMegranate, see [compatibility table](compatibility-table.md).
+POMegranate uses annotations. Only declarative matchers are supported. That should fit 90% percent of your code. You can always mix espresso with POMegranate, see [compatibility table](compatibility-table.md).
 
 # Mixing code with Espresso
-Sometimes, the annotations from  [compatibility table](compatibility-table.md) are not enough. It's not the end of the world. You can still mix espresso in your page object model:
+Sometimes, the annotations from  [compatibility table](compatibility-table.md) are not enough. It's not the end of the world. You can still mix Espresso with your page object model:
 ```java
 public class LoginPageObjectWithCustomMatchers extends PageObject {
 
