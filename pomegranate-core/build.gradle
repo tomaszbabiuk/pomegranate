@@ -22,43 +22,10 @@ repositories {
     jcenter()
 }
 
-
 def siteUrl = 'https://github.com/tomaszbabiuk/pomegranate'
 def gitUrl = 'https://github.com/tomaszbabiuk/pomegranate.git'
-
-apply plugin: 'java-library'
-apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.jfrog.artifactory'
-
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-annotations:28.0.0'
-}
-
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
-
 def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'
 def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'
-
-tasks.withType(Javadoc) {
-    options.links(javaApiUrl, groovyApiUrl)
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from 'build/docs/javadoc'
-}
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = 'sources'
-}
-
-//jar.dependsOn sourcesJar
-
 def pomConfig = {
     licenses {
         license {
@@ -74,6 +41,28 @@ def pomConfig = {
             email "tomasz.babiuk@gmail.com"
         }
     }
+}
+
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.jfrog.artifactory'
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+tasks.withType(Javadoc) {
+    options.links(javaApiUrl, groovyApiUrl)
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
 }
 
 publishing {
@@ -127,4 +116,9 @@ bintray {
         issueTrackerUrl = 'https://github.com/tomaszbabiuk/pomegranate/issues'
         vcsUrl = gitUrl
     }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-annotations:28.0.0'
 }

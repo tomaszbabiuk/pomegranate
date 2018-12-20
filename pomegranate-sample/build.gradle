@@ -18,7 +18,6 @@ android {
     }
 }
 
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -30,13 +29,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation 'com.github.tomaszbabiuk:pomegranate-core:0.1.0-SNAPSHOT'
-//    androidTestImplementation 'com.github.tomaszbabiuk.pomegranate:pomegranate-espresso:4f17891'
-    androidTestAnnotationProcessor 'com.github.tomaszbabiuk:pomegranate-processor:0.1.0-SNAPSHOT'
 
-
-
-//    androidTestImplementation project(':pomegranate-core')
+    androidTestImplementation project(':pomegranate-core')
     androidTestImplementation project(':pomegranate-espresso')
-//    androidTestAnnotationProcessor project(":pomegranate-processor")
+    androidTestAnnotationProcessor project(":pomegranate-processor")
 }

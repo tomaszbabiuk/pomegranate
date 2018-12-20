@@ -1,147 +1,125 @@
+group = 'com.github.tomaszbabiuk'
+version = '0.1.0'
+
+Properties properties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+properties.load(inputStream)
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.1.1"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
+    }
+}
+
+repositories {
+    google()
+    jcenter()
+}
+
+def siteUrl = 'https://github.com/tomaszbabiuk/pomegranate'
+def gitUrl = 'https://github.com/tomaszbabiuk/pomegranate.git'
+def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'
+def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "tomaszbabiuk"
+            name "Tomasz Babiuk"
+            email "tomasz.babiuk@gmail.com"
+        }
+    }
+}
+
 apply plugin: 'java-library'
 apply plugin: 'maven-publish'
-apply plugin: 'signing'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.jfrog.artifactory'
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':pomegranate-core')
-    implementation 'com.squareup:javapoet:1.11.1'
-}
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
-
-test {
-    // show standard out and standard error of the test JVM(s) on the console
-    testLogging.showStandardStreams = true
-}
-
-task sourceJar(type: Jar) {
-    classifier "sources"
-    from sourceSets.main.allJava
+tasks.withType(Javadoc) {
+    options.links(javaApiUrl, groovyApiUrl)
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier "javadoc"
-    from javadoc.destinationDir
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
 }
 
-artifacts {
-    archives jar
-    archives sourceJar
-    archives javadocJar
-}
-
-signing {
-    sign configurations.archives
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            customizePom(pom)
-            groupId 'com.github.tomaszbabiuk'
-            artifactId 'pomegranate-processor'
-            version '0.1.0-SNAPSHOT'
-
             from components.java
+            artifact sourcesJar
+            artifact javadocJar
 
-            // create the sign pom artifact
             pom.withXml {
-                def pomFile = file("${project.buildDir}/generated-pom.xml")
-                writeTo(pomFile)
-                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
-                artifact(pomAscFile) {
-                    classifier = null
-                    extension = 'pom.asc'
-                }
-            }
-
-            artifact(sourceJar) {
-                classifier = 'sources'
-            }
-            artifact(javadocJar) {
-                classifier = 'javadoc'
-            }
-
-            // create the signed artifacts
-            project.tasks.signArchives.signatureFiles.each {
-                artifact(it) {
-                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
-                    if (matcher.find()) {
-                        classifier = matcher.group(1)
-                    } else {
-                        classifier = null
-                    }
-                    extension = 'jar.asc'
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots"
-            credentials {
-                username sonatypeUsername
-                password sonatypePassword
+                def root = asNode()
+                root.appendNode('description', 'POMegranate is page object injection framework for android automation tests.')
+                root.children().last() + pomConfig
             }
         }
     }
 }
 
-def customizePom(pom) {
-    pom.withXml {
-        def root = asNode()
-
-        // eliminate test-scoped dependencies (no need in maven central POMs)
-        root.dependencies.removeAll { dep ->
-            dep.scope == "test"
+artifactory {
+    contextUrl = 'https://oss.jfrog.org'
+    resolve {
+        repository {
+            repoKey = 'libs-release'
         }
-
-        // add all items necessary for maven central publication
-        root.children().last() + {
-            resolveStrategy = Closure.DELEGATE_FIRST
-
-            description 'POMegranate is page object injection framework for android automation tests.'
-            name 'POMegranate Android'
-            url 'https://github.com/tomaszbabiuk/pomegranate'
-            organization {
-                name 'com.github.tomaszbabiuk'
-                url 'https://github.com/tomaszbabiuk'
-            }
-            issueManagement {
-                system 'GitHub'
-                url 'https://github.com/tomaszbabiuk/pomegranate/issues'
-            }
-            licenses {
-                license {
-                    name 'Apache License 2.0'
-                    url 'https://github.com/tomaszbabiuk/pomegranate/blob/master/LICENSE'
-                    distribution 'repo'
-                }
-            }
-            scm {
-                url 'https://github.com/tomaszbabiuk/pomegranate'
-                connection 'scm:git:git://github.com/tomaszbabiuk/pomegranate.git'
-                developerConnection 'scm:git:ssh://git@github.com:tomaszbabiuk/pomegranate.git'
-            }
-            developers {
-                developer {
-                    name 'Tomasz Babiuk'
-                }
-            }
+    }
+    publish {
+        repository {
+            repoKey = 'pomegranate'
+            username = properties.getProperty('bintray.user')
+            password = properties.getProperty('bintray.key')
         }
     }
 }
 
-model {
-    tasks.generatePomFileForMavenJavaPublication {
-        destination = file("$buildDir/generated-pom.xml")
+task install(dependsOn: 'publishMavenJavaPublicationToMavenLocal') {
+    doLast {
+        logger.info "Installing $project.name"
     }
-    tasks.publishMavenJavaPublicationToMavenLocal {
-        dependsOn project.tasks.signArchives
+}
+
+bintray {
+    user = properties.getProperty('bintray.user')
+    key = properties.getProperty('bintray.key')
+    publications = ['mavenJava']
+    pkg {
+        repo = 'pomegranate'
+        name = 'pomegranate-processor'
+        licenses = ['Apache-2.0']
+        desc = 'POMegranate is page object injection framework for android automation tests.'
+        websiteUrl = siteUrl
+        issueTrackerUrl = 'https://github.com/tomaszbabiuk/pomegranate/issues'
+        vcsUrl = gitUrl
     }
-    tasks.publishMavenJavaPublicationToMavenRepository {
-        dependsOn project.tasks.signArchives
-    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':pomegranate-core')
+    implementation 'com.squareup:javapoet:1.11.1'
 }
