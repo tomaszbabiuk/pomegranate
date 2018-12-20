@@ -14,6 +14,7 @@ import pomegranate.sample.pageobjects.LoginPageObject;
 import pomegranate.core.InstrumentationContextResolver;
 import pomegranate.espresso.EspressoInstrumentationContext;
 import pomegranate.sample.LoginActivity;
+import pomegranate.sample.pageobjects.LoginPageObjectWithCustomMatchers;
 
 
 @LargeTest
@@ -35,8 +36,8 @@ public class LoginPageTest {
     @Test
     public void userCanLoginWithoutAppCrash() {
         LoginPageObject mainPage = new LoginPageObject();
-        mainPage.firstName.typeText("jacky");
-        mainPage.lastName.typeText("knifey");
+        mainPage.firstName.typeText("pommer");
+        mainPage.lastName.typeText("granator");
         mainPage.termsAndConditionsCheck.setChecked(true);
         mainPage.login.assertIsDisplayed();
     }

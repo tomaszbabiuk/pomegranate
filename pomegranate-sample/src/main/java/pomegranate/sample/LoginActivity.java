@@ -36,14 +36,14 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         String firstNameText = Objects.requireNonNull(firstNameInput.getEditText()).getText().toString();
-        if (firstNameText.equals("jack")) {
+        if (firstNameText.equals("pommer")) {
             firstNameInput.setError(getString(R.string.error_invalid_credentials));
             lastNameInput.setError(getString(R.string.error_invalid_credentials));
             return false;
         }
 
         String lastNameText = Objects.requireNonNull(lastNameInput.getEditText()).getText().toString();
-        if (lastNameText.equals("knife")) {
+        if (lastNameText.equals("granator")) {
             firstNameInput.setError(getString(R.string.error_invalid_credentials));
             lastNameInput.setError(getString(R.string.error_invalid_credentials));
             return false;

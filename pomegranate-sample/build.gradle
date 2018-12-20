@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    maven { url "https://dl.bintray.com/tomaszbabiuk/pomegranate" }
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -30,7 +34,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
 
-    androidTestImplementation project(':pomegranate-core')
-    androidTestImplementation project(':pomegranate-espresso')
-    androidTestAnnotationProcessor project(":pomegranate-processor")
+    androidTestImplementation 'com.github.tomaszbabiuk:pomegranate-core:0.1.0'
+    androidTestImplementation 'com.github.tomaszbabiuk:pomegranate-espresso:0.1.0'
+    androidTestAnnotationProcessor 'com.github.tomaszbabiuk:pomegranate-processor:0.1.0'
 }

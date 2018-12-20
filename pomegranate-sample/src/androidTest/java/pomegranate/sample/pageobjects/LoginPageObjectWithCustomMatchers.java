@@ -23,11 +23,11 @@ public class LoginPageObjectWithCustomMatchers extends PageObject {
     @IsDescendantOfA(R.id.first_name_input)
     public InstrumentedTextView firstName;
 
-    //this instrumented view will be created manually
-    public InstrumentedTextView lastName;
+    //this instrumented view will be created in the constructor
+    public EspressoInstrumentedTextView lastName;
 
     public LoginPageObjectWithCustomMatchers() {
-        //first let's jack-knife do it's magic
+        //first let's POMgranate do it's magic
         PageObjectBinder.bind(this);
 
         //and now, let's add custom binding
@@ -35,5 +35,13 @@ public class LoginPageObjectWithCustomMatchers extends PageObject {
                 isAssignableFrom(EditText.class),
                 isDescendantOfA(withId(R.id.last_name_input))
         )));
+    }
+
+    public void performCustomActionOnLastName() {
+        //lastName.performCustom(/* your custom ViewActions goes here */);
+    }
+
+    public void performCustomAssertion() {
+        //lastName.assertCustom(/* your custom ViewAssertion goes here */);
     }
 }
