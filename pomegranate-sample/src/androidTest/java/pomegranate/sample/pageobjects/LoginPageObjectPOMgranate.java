@@ -12,7 +12,7 @@ import pomegranate.pageobject.InstrumentedEditView;
 import pomegranate.sample.R;
 
 
-public class LoginPageObject {
+public class LoginPageObjectPOMgranate {
 
     @IsAssignableFrom(EditText.class)
     @IsDescendantOfA(R.id.first_name_input)
@@ -28,7 +28,7 @@ public class LoginPageObject {
     @WithId(R.id.login_button)
     public EspressoInstrumentedView login;
 
-    public LoginPageObject() {
+    public LoginPageObjectPOMgranate() {
         PageObjectBinder.bind(this);
     }
 }

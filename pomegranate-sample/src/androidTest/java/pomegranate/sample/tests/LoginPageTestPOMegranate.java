@@ -10,16 +10,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import pomegranate.sample.pageobjects.LoginPageObject;
+import pomegranate.sample.pageobjects.LoginPageObjectPOMgranate;
 import pomegranate.core.InstrumentationContextResolver;
 import pomegranate.espresso.EspressoInstrumentationContext;
 import pomegranate.sample.LoginActivity;
-import pomegranate.sample.pageobjects.LoginPageObjectWithCustomMatchers;
 
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LoginPageTest {
+public class LoginPageTestPOMegranate {
 
     private final ActivityTestRule<LoginActivity> loginActivityTestRule =
             new ActivityTestRule<>(LoginActivity.class);
@@ -35,7 +34,7 @@ public class LoginPageTest {
 
     @Test
     public void userCanLoginWithoutAppCrash() {
-        LoginPageObject mainPage = new LoginPageObject();
+        LoginPageObjectPOMgranate mainPage = new LoginPageObjectPOMgranate();
         mainPage.firstName.typeText("pommer");
         mainPage.lastName.typeText("granator");
         mainPage.termsAndConditionsCheck.setChecked(true);
