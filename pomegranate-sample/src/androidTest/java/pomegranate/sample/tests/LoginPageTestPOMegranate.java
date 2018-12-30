@@ -39,5 +39,7 @@ public class LoginPageTestPOMegranate {
         mainPage.lastName.typeText("granator");
         mainPage.termsAndConditionsCheck.setChecked(true);
         mainPage.login.assertIsDisplayed();
+
+        //TODO: continue test
     }
 }

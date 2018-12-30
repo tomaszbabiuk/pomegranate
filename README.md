@@ -8,12 +8,13 @@ The inspiration for this framework comes from two projects: Selenium tools for w
 
 POMegranate is using annotation processor to generate it's code when you build/run your automation tests. No reflection is used! Generated code is clean and self-describing.
 
-#Benefits
+# Benefits
 1) It's much easier to use Page Object Model pattern (https://martinfowler.com/bliki/PageObject.html) on Android
 2) If yot use Selenium for web automation before, it's gonna be easier for you to switch to Android tests (https://www.seleniumhq.org/docs/06_test_design_considerations.jsp#page-object-design-pattern)
 3) Declarative code is cleaner and self describing
 4) POMegranate uses annotation processing, so it's fast (no reflection)
 5) You can always mix Espresso with POMegranate in edge cases.
+6) Better isolation of page elements due to specialization (you won't be able to type text on a label or a checkbox).
 
 # How to use?
 Add POMegranate repository to your project's gradle file
@@ -23,11 +24,30 @@ repositories {
 }
 ```
 
-And use POMegranate packets:
+And use POMegranate dependencies:
 ```groovy
     androidTestImplementation 'com.github.tomaszbabiuk:pomegranate-core:0.1.0'
     androidTestImplementation 'com.github.tomaszbabiuk:pomegranate-espresso:0.1.0'
     androidTestAnnotationProcessor 'com.github.tomaszbabiuk:pomegranate-processor:0.1.0'
+```
+
+Initiate instrumentation context on every test:
+
+@LargeTest
+@RunWith(AndroidJUnit4.class)
+public class LoginPageTestPOMegranate {
+
+```java
+@LargeTest
+@RunWith(AndroidJUnit4.class)
+public class LoginPageTestPOMegranate {
+
+    @Before
+    public void setup() {
+        InstrumentationContextResolver.set(new EspressoInstrumentationContext(InstrumentationRegistry.getTargetContext()));
+        loginActivityTestRule.launchActivity(ACTIVITY_INTENT);
+    }
+}
 ```
 
 # Sample Page Object Model with POMegranate
@@ -36,7 +56,7 @@ Here's how your Page Objects can look if you decide to use POMegranate:
 ```java
 public class LoginPageObject {
 
-    @IsAssignableFrom(EditText.class)
+     @IsAssignableFrom(EditText.class)
      @IsDescendantOfA(R.id.first_name_input)
      public InstrumentedTextView firstName;
  

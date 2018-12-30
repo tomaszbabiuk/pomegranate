@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import pomegranate.sample.LoginActivity;
 import pomegranate.sample.pageobjects.LoginPageObjectEspresso;
 
-
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class LoginPageTestEspresso {

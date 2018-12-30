@@ -11,7 +11,6 @@ import pomegranate.pageobject.InstrumentedCheckableView;
 import pomegranate.pageobject.InstrumentedEditView;
 import pomegranate.sample.R;
 
-
 public class LoginPageObjectPOMgranate {
 
     @IsAssignableFrom(EditText.class)
